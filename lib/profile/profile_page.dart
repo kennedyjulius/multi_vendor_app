@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:multi_vendor_app/common/custom_container.dart';
+import 'package:multi_vendor_app/constants/constants.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -6,9 +9,10 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("ProfilePage"),
-      ),
+      backgroundColor: kPrimary,
+      appBar: PreferredSize(preferredSize: Size.fromHeight(130.h), 
+      child: Container(height: 130.h,)),
+      body: SafeArea(child: CustomContainer(containerContent: Container())),
     );
   }
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:multi_vendor_app/common/custom_container.dart';
+import 'package:multi_vendor_app/constants/constants.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -7,9 +10,10 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("CartPage"),
-      ),
+      backgroundColor: kPrimary,
+      appBar: PreferredSize(preferredSize: Size.fromHeight(130.h), 
+      child: Container(height: 130.h,)),
+      body: SafeArea(child: CustomContainer(containerContent: Container())),
     );
   }
-}
+  }
