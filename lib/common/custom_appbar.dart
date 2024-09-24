@@ -13,7 +13,7 @@ class CustomAppBar extends StatelessWidget {
         vertical: 6.h,
         
       ),
-      height: 110.h,
+      height: 96.h,
       width: width,
       color: kOffWhite,
       child: Container(
@@ -21,20 +21,20 @@ class CustomAppBar extends StatelessWidget {
           top: 20.h,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
               children: [
                 CircleAvatar(
-                  radius: 23.r,
+                  radius: 25.r,
                   backgroundColor: kSecondary,
                   backgroundImage: NetworkImage(""),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
                     bottom: 6.h,
-                    left: 8.w,
+                    left: 12.w,
                   ),child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
