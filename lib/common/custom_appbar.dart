@@ -36,7 +36,7 @@ class CustomAppBar extends StatelessWidget {
                     bottom: 6.h,
                     left: 8.w,
                   ),child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Deliver to",
