@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:multi_vendor_app/categories/allcategories_page.dart';
 import 'package:multi_vendor_app/common/custom_appbar.dart';
 import 'package:multi_vendor_app/common/custom_container.dart';
+import 'package:multi_vendor_app/common/heading.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
+import 'package:multi_vendor_app/home/all_fastetst_foods.dart';
+import 'package:multi_vendor_app/home/all_nearby_restaaurants.dart';
+import 'package:multi_vendor_app/home/recommendations_page.dart';
+import 'package:multi_vendor_app/home/widgets/category_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,7 +23,25 @@ class HomePage extends StatelessWidget {
       child: CustomAppBar(),
       ),
       body: SafeArea(
-        child: AllCategories())
+        child: CustomContainer(containerContent: Column(
+          children: [
+            CategoryList(),Heading(
+              text: "Nearby Restaurant", ontap: () {
+              Get.to(AllNearbyRestaaurants());
+            },),
+
+                    CategoryList(),Heading(
+              text: "Try Something New", ontap: () {
+              Get.to(ReccomendationsPage());
+            },),
+
+                    CategoryList(),Heading(
+              text: "Food Closer to you", ontap: () {
+              AllFastetstFoods();
+            },),
+          ],
+        ))
+        )
     );
   }
 }

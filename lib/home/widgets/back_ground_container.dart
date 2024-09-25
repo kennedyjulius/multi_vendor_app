@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 
 class BackGroundContainer extends StatelessWidget {
-  const BackGroundContainer({super.key});
+  const BackGroundContainer({super.key,  required this.color, required this.child});
+   final Widget child;
+   final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,8 @@ class BackGroundContainer extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: kPrimary,borderRadius: BorderRadius.only(
+        color: color,
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20.r),
           topRight: Radius.circular(20.r),
         ),
@@ -20,6 +23,7 @@ class BackGroundContainer extends StatelessWidget {
         opacity: .7,
         )
       ),
+      child: child,
     );
   }
 }
