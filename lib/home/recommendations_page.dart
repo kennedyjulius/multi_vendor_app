@@ -8,9 +8,9 @@ class ReccomendationsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.3,
-        title: Text("Try Something New"),
+        title: const Text("Try Something New"),
       ),
-      body: Center(
+      body: const Center(
         child: Text("Try Something NEw"),
       ),
     );

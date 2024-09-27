@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../lib/constants/constants.dart';
+import 'package:multi_vendor_app/constants/constants.dart';
 import 'shimmer_widget.dart';
 
 

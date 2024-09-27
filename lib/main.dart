@@ -11,7 +11,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           // You can use the library anywhere in the app even in theme
           theme: ThemeData(
             scaffoldBackgroundColor: kOffWhite,
-            iconTheme: IconThemeData(color: kDark),
+            iconTheme: const IconThemeData(color: kDark),
             primarySwatch: Colors.grey,
             textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
           ),

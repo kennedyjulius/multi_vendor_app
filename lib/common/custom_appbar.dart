@@ -29,7 +29,7 @@ class CustomAppBar extends StatelessWidget {
                 CircleAvatar(
                   radius: 25.r,
                   backgroundColor: kSecondary,
-                  backgroundImage: NetworkImage(""),
+                  backgroundImage: const NetworkImage(""),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
@@ -39,7 +39,7 @@ class CustomAppBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Deliver to",
+                      const Text("Deliver to",
                       style: TextStyle(
                         fontSize: 13,
                         color: kSecondary,
@@ -49,7 +49,7 @@ class CustomAppBar extends StatelessWidget {
 
                       SizedBox(
                         width: width*0.65,
-                        child: Text(
+                        child: const Text(
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 11,
@@ -64,7 +64,7 @@ class CustomAppBar extends StatelessWidget {
                   ),
               ],
             ),
-            Text(getTimeOfDay(), style: TextStyle(
+            Text(getTimeOfDay(), style: const TextStyle(
               fontSize: 35,
 
             ),)

@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 
 class CategoryController extends GetxController {
   // Private reactive variables
-  RxString _category = ''.obs;
-  RxString _title = ''.obs;
+  final RxString _category = ''.obs;
+  final RxString _title = ''.obs;
 
   // Public getters to access the values
   String get categoryValue => _category.value;

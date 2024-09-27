@@ -8,9 +8,9 @@ class AllNearbyRestaaurants extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.3,
-        title: Text("All Nearby Restaurants"),
+        title: const Text("All Nearby Restaurants"),
       ),
-      body: Center(
+      body: const Center(
         child: Text("All Nearby Restaurants"),
       ),
     );

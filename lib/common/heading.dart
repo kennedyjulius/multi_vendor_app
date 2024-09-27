@@ -13,7 +13,7 @@ class Heading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 12.0
       ),
       child: Row(
@@ -23,7 +23,7 @@ class Heading extends StatelessWidget {
             top: 10.h,
             
           ),
-          child: Text(text, style: TextStyle(
+          child: Text(text, style: const TextStyle(
             fontSize: 16,
             color: kDark,
             fontWeight: FontWeight.bold

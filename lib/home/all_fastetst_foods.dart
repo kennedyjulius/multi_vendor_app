@@ -8,9 +8,9 @@ class AllFastetstFoods extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.3,
-        title: Text("Foods closer to you"),
+        title: const Text("Foods closer to you"),
       ),
-      body: Center(
+      body: const Center(
         child: Text("Foods closer to you"),
       ),
     );

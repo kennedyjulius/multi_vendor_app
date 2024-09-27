@@ -5,6 +5,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:multi_vendor_app/categories/allcategories_page.dart';
 import 'package:multi_vendor_app/common/custom_appbar.dart';
 import 'package:multi_vendor_app/common/custom_container.dart';
+import 'package:multi_vendor_app/common/food_list.dart';
 import 'package:multi_vendor_app/common/heading.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/home/all_fastetst_foods.dart';
@@ -20,25 +21,28 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: kPrimary,
       appBar: PreferredSize(preferredSize: Size.fromHeight(130.h), 
-      child: CustomAppBar(),
+      child: const CustomAppBar(),
       ),
       body: SafeArea(
         child: CustomContainer(containerContent: Column(
           children: [
-            CategoryList(),Heading(
+            const CategoryList(),Heading(
               text: "Nearby Restaurant", ontap: () {
-              Get.to(AllNearbyRestaaurants());
+              Get.to(const AllNearbyRestaaurants());
             },),
 
-                    CategoryList(),Heading(
+            const CategoryList(),
+            Heading(
               text: "Try Something New", ontap: () {
-              Get.to(ReccomendationsPage());
+              Get.to(const ReccomendationsPage());
             },),
+            const FoodList(),
 
-                    CategoryList(),Heading(
+              const CategoryList(),Heading(
               text: "Food Closer to you", ontap: () {
-              AllFastetstFoods();
+              const AllFastetstFoods();
             },),
+            const FoodList()
           ],
         ))
         )
