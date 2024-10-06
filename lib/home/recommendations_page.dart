@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:multi_vendor_app/constants/constants.dart';
+import 'package:multi_vendor_app/constants/uidata.dart';
+import 'package:multi_vendor_app/home/widgets/app_style.dart';
+import 'package:multi_vendor_app/home/widgets/back_ground_container.dart';
+import 'package:multi_vendor_app/home/widgets/food_tile.dart';
+import 'package:multi_vendor_app/home/widgets/reusable_text.dart';
 
 class ReccomendationsPage extends StatelessWidget {
   const ReccomendationsPage({super.key});
@@ -7,12 +14,26 @@ class ReccomendationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.3,
-        title: const Text("Try Something New"),
+        elevation: 0,
+        backgroundColor: kSecondary,
+        title: ReusableText(text: "Reccommendation", 
+        style: appStyle(13, kLightWhite, FontWeight.w600)
+        ),
       ),
-      body: const Center(
-        child: Text("Try Something NEw"),
-      ),
+      body: BackGroundContainer(
+          color: Colors.white, 
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: List.generate(foods.length, (i) {
+                var food = foods[i];
+                return FoodTile(food: food);
+              },),
+              
+            ),
+          ),
+          )
     );
   }
 }

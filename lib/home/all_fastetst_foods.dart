@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/constants/uidata.dart';
+import 'package:multi_vendor_app/home/widgets/app_style.dart';
 import 'package:multi_vendor_app/home/widgets/back_ground_container.dart';
 import 'package:multi_vendor_app/home/widgets/food_tile.dart';
+import 'package:multi_vendor_app/home/widgets/reusable_text.dart';
 
 class AllFastetstFoods extends StatelessWidget {
   const AllFastetstFoods({super.key});
@@ -11,8 +14,11 @@ class AllFastetstFoods extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.3,
-        title: const Text("Foods closer to you"),
+        elevation: 0,
+        backgroundColor: kSecondary,
+        title: ReusableText(text: "Fastest Food", 
+        style: appStyle(13, kLightWhite, FontWeight.w600)
+        ),
       ),
       body: BackGroundContainer(
           color: Colors.white, 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/constants/uidata.dart';
 import 'package:multi_vendor_app/home/widgets/app_style.dart';
@@ -85,15 +86,28 @@ class FoodTile extends StatelessWidget {
 
                       SizedBox(
                         width: width * 0.7,
-                        child: Text(food['coords']['address'],
-                        style: TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                        fontSize: 9,
-                        color: kGray,
-                        fontWeight: FontWeight.w400,
-                      ),
+                        height: 15.h,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: food['additives'].length,
+                          itemBuilder: (context, i) {
+                            var additive = food['additives'][i];
+                          return Container(
+                            margin: EdgeInsets.only(
+                              right: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: kSecondaryLight,
+                              borderRadius: BorderRadius.all(Radius.circular(9.r))
+                            ),
+                            child: Padding(padding: EdgeInsets.all(2.h),
+                            child: ReusableText(text: additive['title'],
+                             style: appStyle(8, kGray, FontWeight.w400)),
+                            ),
+                          );
+                        },)
                         ),
-                      )
+                      ),
                     ],
                   )
                 ],
@@ -116,7 +130,30 @@ class FoodTile extends StatelessWidget {
                 child: ReusableText(
                   text: food['price'].toStringAsFixed(2),
                   style: appStyle(12, kLightWhite, FontWeight.w600))),
-          ))
+          ),
+          ),
+
+           Positioned(
+            right: 75.w,
+            top: 6.h,
+            child: GestureDetector(
+              onTap: () {
+                
+              },
+              child: Container(
+                width: 19.w,
+                height: 19.h,
+                decoration: BoxDecoration(
+                  color: kSecondary,
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                child: Center(
+                  child: Icon(MaterialCommunityIcons.cart_plus, size: 15.h, color: kLightWhite,
+                  ),
+                ),
+                        ),
+            ),
+          ),
         ],
       ),
     );
