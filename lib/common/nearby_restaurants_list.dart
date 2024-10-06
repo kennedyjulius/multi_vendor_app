@@ -19,7 +19,7 @@ class NearbyRestaurants extends StatelessWidget {
         children: List.generate(restaurants.length, (i) {
           var restaurant = restaurants[i];
           return RestaurantWidget(
-            image: restaurants['imageUrl'], 
+            image: restaurant['imageUrl'], 
             logo: restaurant['logoUrl'], 
             title: restaurant['title'], 
             time: restaurant['time'],
