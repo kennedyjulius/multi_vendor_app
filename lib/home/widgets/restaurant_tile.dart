@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
-import 'package:multi_vendor_app/constants/uidata.dart';
 import 'package:multi_vendor_app/home/widgets/app_style.dart';
 import 'package:multi_vendor_app/home/widgets/reusable_text.dart';
 

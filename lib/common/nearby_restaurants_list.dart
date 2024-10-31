@@ -9,6 +9,7 @@ class NearbyRestaurants extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       height: 194.h,
       padding: EdgeInsets.only(
         left: 12.w,
