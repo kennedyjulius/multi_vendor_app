@@ -45,27 +45,32 @@ class CategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return GestureDetector(
       onTap: () {
         if (controller.categoryValue == category['_id']) {
-          controller.updateCategory ='';
+          controller.updateCategory = '';
           controller.updateTitle = '';
         } else if (category['value'] == 'More') {
-          Get.to(() => const AllCategories()); // Ensure AllCategories() is navigable
+          Get.to(() =>
+              const AllCategories()); // Ensure AllCategories() is navigable
         } else {
           controller.updateCategory = category['_id'];
-          controller.updateTitle =category['title'];
+          controller.updateTitle = category['title'];
         }
       },
       child: Obx(
         () => Container(
           margin: EdgeInsets.only(right: 5.w), // Replace EdgeI with EdgeInsets
           padding: EdgeInsets.only(top: 4.h),
-          width: MediaQuery.of(context).size.width * 0.19, // Use context size instead of 'width'
+          width: MediaQuery.of(context).size.width *
+              0.19, // Use context size instead of 'width'
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.r),
             border: Border.all(
-              color: controller.categoryValue == category['_id'] ? kSecondary : kWhite,
+              color: controller.categoryValue == category['_id']
+                  ? kSecondary
+                  : kWhite,
               width: 1.w,
             ),
             boxShadow: [
@@ -82,9 +87,15 @@ class CategoryWidget extends StatelessWidget {
               SizedBox(
                 height: 35.h,
                 child: Image.network(
-                  category['imageUrl'] ?? '', // Ensure 'imageUrl' is not null
+                  category['imageUrl'] ?? '',
                   fit: BoxFit.contain,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return const CircularProgressIndicator(); // Shows loading indicator until image is loaded
+                  },
                   errorBuilder: (context, error, stackTrace) {
+                    print(
+                        'Error loading image: $error'); // Prints error to debug console if the image fails
                     return const Icon(Icons.broken_image);
                   },
                 ),

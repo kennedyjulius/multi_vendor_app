@@ -20,7 +20,7 @@ class FoodList extends StatelessWidget {
         children: List.generate(foods.length, (i) {
           var food = foods[i];
           return FoodWidget(
-            image: food['imageUrl'], 
+            imageUrl: food['imageUrl'], 
             title: food['title'], 
             time: food['time'], 
             price: food['price'],

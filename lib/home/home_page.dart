@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimary,
-      appBar: PreferredSize(preferredSize: Size.fromHeight(130.h), 
+      appBar: PreferredSize(preferredSize: Size.fromHeight(110.h), 
       child: const CustomAppBar(),
       ),
       body: SafeArea(

@@ -5,10 +5,14 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 
 class Heading extends StatelessWidget {
-  const Heading({super.key, required this.text, required this.ontap});
-
-  final  String text;
+    final  String text;
   final VoidCallback ontap;
+  const Heading({super.key, 
+  required this.text, 
+  required this.ontap
+  });
+
+
 
   @override
   Widget build(BuildContext context) {
