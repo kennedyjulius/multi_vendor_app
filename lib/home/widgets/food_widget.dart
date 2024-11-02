@@ -49,7 +49,7 @@ class FoodWidget extends StatelessWidget {
                         height: 112.h,
                         width: width * 0.8,
                         child: Image.network(
-                          image,  // Use imageUrl directly from parameter
+                          imageUrl,  // Use imageUrl directly from parameter
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) => Icon(
                             Icons.broken_image,
