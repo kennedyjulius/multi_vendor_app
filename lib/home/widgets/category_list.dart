@@ -7,6 +7,7 @@ import 'package:multi_vendor_app/constants/uidata.dart'; // Ensure this file has
 import 'package:multi_vendor_app/controllers/category_controller.dart';
 import 'package:multi_vendor_app/hooks/fetch_categories.dart';
 import 'package:multi_vendor_app/models/categories.dart';
+import 'package:multi_vendor_app/shimmers/categories_shimmer.dart';
 
 class CategoryList extends StatelessWidget {
   const CategoryList({super.key});
@@ -24,7 +25,9 @@ class CategoryList extends StatelessWidget {
         left: 12.w,
         top: 10.h,
       ),
-      child: ListView(
+      child: isLoading ?
+      CategoriesShimmer()
+      :ListView(
         scrollDirection: Axis.horizontal,
         children: List.generate(
           categories.length,

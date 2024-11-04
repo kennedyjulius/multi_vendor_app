@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -8,8 +9,10 @@ import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/constants/uidata.dart';
 import 'package:multi_vendor_app/home/widgets/back_ground_container.dart';
 import 'package:multi_vendor_app/home/widgets/category_list.dart';
+import 'package:multi_vendor_app/hooks/fetch_all_catergories.dart';
+import 'package:multi_vendor_app/models/categories.dart';
 
-class AllCategories extends StatefulWidget {
+class AllCategories extends HookWidget {
   const AllCategories({super.key});
 
   @override
@@ -23,6 +26,8 @@ class _AllCategoriesState extends State<AllCategories> {
 
  
   Widget build(BuildContext context) {
+    final hookResults = useFetchAllCategories();
+    List<CategoriesModel>? categories = hookResults.data;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -41,7 +46,9 @@ class _AllCategoriesState extends State<AllCategories> {
             top: 10.h,
           ),
           height: height,
-          child: ListView(
+          child: isLoading ?
+          FoodListShimmer()
+          : ListView(
             scrollDirection: Axis.vertical,
             children: List.generate(categories.length, (i) {
               var category = categories[i];

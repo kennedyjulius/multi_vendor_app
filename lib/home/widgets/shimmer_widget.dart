@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_vendor_app/constants/constants.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ShimmerWidget extends StatelessWidget {
   final double shimmerWidth;
@@ -18,9 +20,33 @@ class ShimmerWidget extends StatelessWidget {
     return Container(
       width: shimmerWidth,
       height: shimmerHeight,
-      decoration: BoxDecoration(
-        color: CupertinoColors.systemGrey,
-        borderRadius: BorderRadius.circular(shimmerRadius),
+      padding: const EdgeInsets.only(
+        right: 12,
+        top: 8.0,
+      ),
+      child: _buildShimmerLine(
+        height: shimmerHeight - 20,
+        width: shimmerWidth - 15,
+        radius: shimmerRadius - 10,
+      ),
+    );
+  }
+
+  Widget _buildShimmerLine({
+    required double height,
+    required double width,
+    required double radius,
+  }) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: kSecondaryLight,
+      child: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(radius),
+        ),
       ),
     );
   }
