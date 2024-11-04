@@ -5,12 +5,18 @@ import 'package:multi_vendor_app/categories/allcategories_page.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/constants/uidata.dart'; // Ensure this file has 'categories' data defined
 import 'package:multi_vendor_app/controllers/category_controller.dart';
+import 'package:multi_vendor_app/hooks/fetch_categories.dart';
+import 'package:multi_vendor_app/models/categories.dart';
 
 class CategoryList extends StatelessWidget {
   const CategoryList({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final hookResult = useFetchCategories();
+    List<CategoriesModel>? categoriesList = hookResult.data;
+    final isLoading = hookResult.isloading;
+    final error = hookResult.error;
     final controller = Get.put(CategoryController());
     return Container(
       height: 75.h,
@@ -23,8 +29,7 @@ class CategoryList extends StatelessWidget {
         children: List.generate(
           categories.length,
           (i) {
-            var category = categories[i];
-
+            CategoriesModel category = categoriesList![i];
             return CategoryWidget(controller: controller, category: category);
           },
         ),
