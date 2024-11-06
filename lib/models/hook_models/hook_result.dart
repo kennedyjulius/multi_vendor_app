@@ -14,4 +14,6 @@ class FetchHook {
     required this.error, 
     required this.refetch, required bool isLoading, ApiError? apiError
     });
+
+  get isLoading => null;
 }
