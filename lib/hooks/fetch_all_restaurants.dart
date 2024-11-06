@@ -16,7 +16,7 @@ FetchHook useFetchRestaurants(String code) {
     isLoading.value = true;
 
     try {
-      Uri url = Uri.parse('$appBaseUrl/api/restaurant/$code');
+      Uri url = Uri.parse('$appBaseUrl/api/restaurant/all/$code');
       final response = await http.get(url);
 
       if (response.statusCode == 200) {

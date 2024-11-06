@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/constants/uidata.dart';
@@ -6,12 +7,17 @@ import 'package:multi_vendor_app/home/widgets/app_style.dart';
 import 'package:multi_vendor_app/home/widgets/back_ground_container.dart';
 import 'package:multi_vendor_app/home/widgets/restaurant_tile.dart';
 import 'package:multi_vendor_app/home/widgets/reusable_text.dart';
+import 'package:multi_vendor_app/hooks/fetch_all_restaurants.dart';
+import 'package:multi_vendor_app/models/restaurant_model.dart';
 
-class AllNearbyRestaaurants extends StatelessWidget {
+class AllNearbyRestaaurants extends HookWidget {
   const AllNearbyRestaaurants({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final hookResults = useFetchAllRestaurants(code);
+    List<RestaurantsModel>? restaurants = hookResults.data;
+    final isLoading = hookResults.isLoading;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -25,10 +31,12 @@ class AllNearbyRestaaurants extends StatelessWidget {
           color: Colors.white, 
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
-            child: ListView(
+            child: isLoading ?
+            FoodListShimmer()
+            : ListView(
               scrollDirection: Axis.horizontal,
               children: List.generate(restaurants.length, (i) {
-                var restaurant = restaurants[i];
+                RestaurantsModel restaurant = restaurants[i];
                 return RestaurantTile(restaurant: restaurant,);
               },),
               
