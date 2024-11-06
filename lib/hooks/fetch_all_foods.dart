@@ -22,7 +22,7 @@ FetchHook useFetchAllFoods(String code) {
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        restaurants.value = foodsModelFromJson(response.body);
+        foods.value = foodsModelFromJson(response.body);
       } else {
         apiError.value = apiErrorFromJson(response.body);
       }

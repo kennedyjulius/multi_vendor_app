@@ -9,6 +9,7 @@ import 'package:multi_vendor_app/home/widgets/restaurant_tile.dart';
 import 'package:multi_vendor_app/home/widgets/reusable_text.dart';
 import 'package:multi_vendor_app/hooks/fetch_all_restaurants.dart';
 import 'package:multi_vendor_app/models/restaurant_model.dart';
+import 'package:multi_vendor_app/shimmers/foodlist_shimmer.dart';
 
 class AllNearbyRestaaurants extends HookWidget {
   const AllNearbyRestaaurants({super.key});
@@ -32,7 +33,7 @@ class AllNearbyRestaaurants extends HookWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             child: isLoading ?
-            FoodListShimmer()
+            FoodlistShimmer()
             : ListView(
               scrollDirection: Axis.horizontal,
               children: List.generate(restaurants.length, (i) {
