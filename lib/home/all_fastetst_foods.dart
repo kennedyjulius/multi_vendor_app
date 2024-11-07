@@ -13,6 +13,8 @@ import 'package:multi_vendor_app/shimmers/foodlist_shimmer.dart';
 
 class AllFastetstFoods extends HookWidget {
   const AllFastetstFoods({super.key});
+  
+  get isLoading => isLoading;
 
   @override
   Widget build(BuildContext context) {

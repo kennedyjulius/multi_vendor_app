@@ -15,12 +15,22 @@ class SearchFoodController extends GetxController {
     _isLoading.value = value;
   }
 
+    final RxBool _isTriggered = false.obs;
+
+  // Expose the loading state
+  bool get isTriggered => _isTriggered.value;
+
+  // Update loading state
+  void setTriggered(bool value) {
+    _isLoading.value = value;
+  }
+
   List<FoodsModel>? searchResults;
 
   Future<void> searchFoods(String key) async {
     setLoading(true); // Call the method correctly
 
-    Uri url = Uri.parse("$appBaseUrl/foods/search/$key");
+    Uri url = Uri.parse("$appBaseUrl/api/foods/search/$key");
 
     try {
       var response = await http.get(url);

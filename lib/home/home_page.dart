@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:multi_vendor_app/categories/allcategories_page.dart';
@@ -8,6 +9,7 @@ import 'package:multi_vendor_app/common/custom_container.dart';
 import 'package:multi_vendor_app/common/food_list.dart';
 import 'package:multi_vendor_app/common/heading.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
+import 'package:multi_vendor_app/controllers/category_controller.dart';
 import 'package:multi_vendor_app/home/all_fastetst_foods.dart';
 import 'package:multi_vendor_app/home/all_nearby_restaaurants.dart';
 import 'package:multi_vendor_app/home/recommendations_page.dart';
@@ -18,13 +20,15 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CategoryController());
     return Scaffold(
       backgroundColor: kPrimary,
       appBar: PreferredSize(preferredSize: Size.fromHeight(110.h), 
       child: const CustomAppBar(),
       ),
       body: SafeArea(
-        child: CustomContainer(containerContent: Column(
+        child: CustomContainer(containerContent: 
+        Obx(() => controller.categoryValue == ''? Column(
           children: [
             const CategoryList(),Heading(
               text: "Nearby Restaurant", ontap: () {
@@ -44,7 +48,16 @@ class HomePage extends StatelessWidget {
             },),
             const FoodList()
           ],
-        ))
+        ):  CustomContainer(containerContent: 
+        Column(children: [
+          Heading(
+            more: true,
+              text: "Explore ${controller.titleValue} Category", ontap: () {
+              Get.to(const ReccomendationsPage());
+            },),
+        ],))
+        ) 
+        )
         )
     );
   }

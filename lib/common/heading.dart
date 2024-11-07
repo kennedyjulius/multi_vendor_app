@@ -6,10 +6,12 @@ import 'package:multi_vendor_app/constants/constants.dart';
 
 class Heading extends StatelessWidget {
     final  String text;
+    final bool? more;
   final VoidCallback ontap;
   const Heading({super.key, 
   required this.text, 
-  required this.ontap
+  required this.ontap, 
+  this.more
   });
 
 
@@ -33,12 +35,12 @@ class Heading extends StatelessWidget {
             fontWeight: FontWeight.bold
           ),),
           ),
-          GestureDetector(
+          more == null ?GestureDetector(
             onTap: () {
               
             },
             child: Icon(AntDesign.appstore1, color: kSecondary, size: 20.sp,),
-          )
+          ) : SizedBox.shrink()
         ],
       ),
     );
