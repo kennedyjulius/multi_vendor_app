@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:multi_vendor_app/common/custom_container.dart';
 import 'package:multi_vendor_app/common/custom_text_field.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
+import 'package:multi_vendor_app/controllers/search_controller.dart';
+import 'package:multi_vendor_app/search/loading_widget.dart';
+import 'package:multi_vendor_app/search/search_results.dart';
+import 'package:multi_vendor_app/shimmers/foodlist_shimmer.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -16,6 +22,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SearchFoodController());
     return Scaffold(
       backgroundColor: kPrimary,
       appBar: AppBar(
@@ -31,7 +38,7 @@ class _SearchPageState extends State<SearchPage> {
             hintText: "Search For Foods",
             suffixIcon: GestureDetector(
               onTap: () {
-                
+                controller.searchFoods(_searchController.text);
               },
               child: Icon(Icons.search, color: kGray, size: 40.h,),
             ),
@@ -40,22 +47,11 @@ class _SearchPageState extends State<SearchPage> {
         ),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              height: 130.h,
-              color: Colors.grey[200], // example styling for visibility
-              child: Center(child: Text("Search Results Area")),
-            ),
-            Expanded(
-              child: CustomContainer(
-                containerContent: Container(
-                  child: Text("Additional content goes here"),
-                ),
-              ),
-            ),
-          ],
-        ),
+        child: CustomContainer(
+          color: Colors.white,
+          containerContent: controller.isLoading ?
+          : controller.searchResults == null ? const  LoadingWidget()
+          : SearchResults()),
       ),
     );
   }

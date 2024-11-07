@@ -3,9 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 
 class CustomContainer extends StatelessWidget {
-  CustomContainer({super.key, required this.containerContent});
+  CustomContainer({super.key, required this.containerContent, this.color});
 
   Widget containerContent;
+  Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class CustomContainer extends StatelessWidget {
           bottomRight: Radius.circular(30.r),
         ),
         child: Container(
-          color: kOffWhite,
+          color: color??kOffWhite,
           width: width,
           child: SingleChildScrollView(
             child: containerContent,
