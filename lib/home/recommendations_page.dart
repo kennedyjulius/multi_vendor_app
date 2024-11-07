@@ -9,6 +9,7 @@ import 'package:multi_vendor_app/home/widgets/food_tile.dart';
 import 'package:multi_vendor_app/home/widgets/reusable_text.dart';
 import 'package:multi_vendor_app/hooks/fetch_all_foods.dart';
 import 'package:multi_vendor_app/models/food.dart';
+import 'package:multi_vendor_app/shimmers/foodlist_shimmer.dart';
 
 class ReccomendationsPage extends HookWidget {
   const ReccomendationsPage({super.key});
@@ -30,7 +31,9 @@ class ReccomendationsPage extends HookWidget {
           color: Colors.white, 
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
-            child: ListView(
+            child: isLoading ?
+            const FoodlistShimmer():
+            ListView(
               scrollDirection: Axis.horizontal,
               children: List.generate(foods!.length, (i) {
                 FoodsModel food = foods![i];
