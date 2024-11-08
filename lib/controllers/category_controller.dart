@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 class CategoryController extends GetxController {
   // Private reactive variables
   final RxString _category = ''.obs;
+
   final RxString _title = ''.obs;
 
   // Public getters to access the values
@@ -12,6 +13,7 @@ class CategoryController extends GetxController {
   // Public setters to update the values
   set updateCategory(String value) {
     _category.value = value;
+    print(_category.value);
   }
 
   set updateTitle(String value) {

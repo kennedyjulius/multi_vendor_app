@@ -54,8 +54,12 @@ class HomePage extends StatelessWidget {
             more: true,
               text: "Explore ${controller.titleValue} Category", ontap: () {
               Get.to(const ReccomendationsPage());
-            },),
-        ],))
+            },
+            ),
+            CategoryFoodList()
+        ],
+        )
+        )
         ) 
         )
         )
