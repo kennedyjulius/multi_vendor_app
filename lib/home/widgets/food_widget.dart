@@ -12,13 +12,14 @@ class FoodWidget extends StatelessWidget {
     required this.title,
     required this.time,
     required this.price,
-    this.onTap,
+    this.onTap, required this.ontap,
   });
 
   final String imageUrl;  // Updated name for clarity
   final String title;
   final String time;
   final double price;
+  final VoidCallback ontap;
 
   final void Function()? onTap;
 

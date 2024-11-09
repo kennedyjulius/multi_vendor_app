@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:multi_vendor_app/constants/uidata.dart';
+import 'package:multi_vendor_app/food/food_page.dart';
 import 'package:multi_vendor_app/home/widgets/food_widget.dart';
 import 'package:multi_vendor_app/hooks/fetch_foods.dart';
 import 'package:multi_vendor_app/models/food.dart';
@@ -17,7 +19,7 @@ class FoodList extends HookWidget {
     final isLoading = hookResults.isloading;
 
     return Container(
-      height: 210.h,
+      height: 180.h,
       padding: EdgeInsets.only(
         left: 12.w,
         top: 10.h,
@@ -34,7 +36,10 @@ class FoodList extends HookWidget {
                   imageUrl: food.imageUrl,
                   title: food.title,
                   time: food.time,
-                  price: food.price,
+                  price: food.price, 
+                  ontap: () { 
+                    Get.to(FoodPage(food: food));
+                   },
                 );
               },
             ),

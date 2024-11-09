@@ -2,19 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
+import 'package:multi_vendor_app/food/food_page.dart';
 import 'package:multi_vendor_app/home/widgets/app_style.dart';
 import 'package:multi_vendor_app/home/widgets/reusable_text.dart';
 import 'package:multi_vendor_app/models/food.dart';
 
 class FoodTile extends StatelessWidget {
-  const FoodTile({super.key, required this.food});
+  const FoodTile({super.key, required this.food, this.color});
 
   final FoodsModel food;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        Get.to(FoodPage(food: food));
+      },
       child: Stack(
         clipBehavior: Clip.hardEdge,
         children: [
