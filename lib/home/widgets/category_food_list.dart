@@ -20,14 +20,14 @@ class CategoryFoodList extends StatelessWidget {
       width: width,
       height: height,
       child: isLoading ?
-      FoodlistShimmer() :
+      const FoodlistShimmer() :
       Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.w),
               child: isLoading ?
               const FoodlistShimmer() :
               ListView(
                 scrollDirection: Axis.horizontal,
-                children: List.generate(foods!.length, (i) {
+                children: List.generate(foods.length, (i) {
                   var food = foods[i];
                   return FoodTile(food: food);
                 },),

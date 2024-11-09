@@ -40,7 +40,7 @@ class Heading extends StatelessWidget {
               
             },
             child: Icon(AntDesign.appstore1, color: kSecondary, size: 20.sp,),
-          ) : SizedBox.shrink()
+          ) : const SizedBox.shrink()
         ],
       ),
     );

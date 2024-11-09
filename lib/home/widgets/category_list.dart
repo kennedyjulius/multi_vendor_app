@@ -26,7 +26,7 @@ class CategoryList extends StatelessWidget {
         top: 10.h,
       ),
       child: isLoading ?
-      CategoriesShimmer()
+      const CategoriesShimmer()
       :ListView(
         scrollDirection: Axis.horizontal,
         children: List.generate(

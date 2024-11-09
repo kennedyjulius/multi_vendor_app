@@ -33,7 +33,7 @@ class AllNearbyRestaaurants extends HookWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             child: isLoading ?
-            FoodlistShimmer()
+            const FoodlistShimmer()
             : ListView(
               scrollDirection: Axis.horizontal,
               children: List.generate(restaurants.length, (i) {

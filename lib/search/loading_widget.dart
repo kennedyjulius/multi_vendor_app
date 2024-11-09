@@ -7,10 +7,10 @@ class LoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width,
       height: height,
-      child: Padding(padding: EdgeInsets.only(bottom: 180), child: LottieBuilder.asset("assets/anime/delivery.json",
+      child: Padding(padding: const EdgeInsets.only(bottom: 180), child: LottieBuilder.asset("assets/anime/delivery.json",
        width: width, height: height/2,)),
     );
   }

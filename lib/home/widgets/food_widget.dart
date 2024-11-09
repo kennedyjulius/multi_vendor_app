@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
-import 'package:multi_vendor_app/constants/uidata.dart'; // Ensure this contains the foods data
+// Ensure this contains the foods data
 
 class FoodWidget extends StatelessWidget {
   const FoodWidget({

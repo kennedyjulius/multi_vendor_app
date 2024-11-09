@@ -50,7 +50,7 @@ class _SearchPageState extends State<SearchPage> {
                 
               },
               child: controller.isTriggered == false
-              ?Icon(Ionicons.search_circle, size: 40, color: kPrimary,)
+              ?const Icon(Ionicons.search_circle, size: 40, color: kPrimary,)
               :Icon(Ionicons.close_circle, size: 40.h, color: kRed,)
             ),
             
@@ -62,7 +62,7 @@ class _SearchPageState extends State<SearchPage> {
           color: Colors.white,
           containerContent: controller.isLoading ?
           : controller.searchResults == null ? const  LoadingWidget()
-          : SearchResults()),
+          : const SearchResults()),
       ),
     );
   }

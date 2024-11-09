@@ -9,11 +9,11 @@ class ShimmerWidget extends StatelessWidget {
   final double shimmerRadius;
 
   const ShimmerWidget({
-    Key? key,
+    super.key,
     required this.shimmerWidth,
     required this.shimmerHeight,
     required this.shimmerRadius,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

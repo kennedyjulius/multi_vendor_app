@@ -1,7 +1,6 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/models/api_error.dart';
-import 'package:multi_vendor_app/models/categories.dart';
 import 'package:multi_vendor_app/models/hook_models/hook_result.dart';
 import 'package:http/http.dart' as http;
 import 'package:multi_vendor_app/models/restaurant_model.dart';

@@ -7,7 +7,7 @@ import 'package:multi_vendor_app/home/widgets/app_style.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
-    Key? key,
+    super.key,
     this.keyboardType,
     this.controller,
     this.onEditingComplete,
@@ -16,7 +16,7 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.hintText,
     this.prefixIcon,
-  }) : super(key: key);
+  });
 
   final TextInputType? keyboardType;
   final TextEditingController? controller;

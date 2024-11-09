@@ -38,7 +38,7 @@ FetchHook useFetchFoodsByCategory(String code) {
   }
 
   useEffect(() {
-    Future.delayed(Duration(seconds: 3));
+    Future.delayed(const Duration(seconds: 3));
     fetchData();
     return null;
   }, []);

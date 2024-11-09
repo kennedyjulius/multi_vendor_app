@@ -53,7 +53,7 @@ class RestaurantTile extends StatelessWidget {
                           child: RatingBarIndicator(
                             rating: 5,
                             itemCount: 5,
-                            itemBuilder: (context, index) => Icon(Icons.star, color: kSecondary,),
+                            itemBuilder: (context, index) => const Icon(Icons.star, color: kSecondary,),
                             itemSize: 15.h,
                            ),
                         ),
@@ -68,7 +68,7 @@ class RestaurantTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(restaurant.title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 11,
                         color: kDark,
                         fontWeight: FontWeight.w400,
@@ -76,7 +76,7 @@ class RestaurantTile extends StatelessWidget {
                       ), 
 
                       Text( "Delivery time: ${restaurant.time}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 11,
                         color: kGray,
                         fontWeight: FontWeight.w600,
@@ -86,7 +86,7 @@ class RestaurantTile extends StatelessWidget {
                       SizedBox(
                         width: width * 0.7,
                         child: Text(restaurant.coords.address,
-                        style: TextStyle(
+                        style: const TextStyle(
                           overflow: TextOverflow.ellipsis,
                         fontSize: 9,
                         color: kGray,
@@ -114,8 +114,7 @@ class RestaurantTile extends StatelessWidget {
               ),
               child: Center(
                 child: ReusableText(
-                  text: restaurant.isAvailable == true ||
-                  restaurant.isAvailable == null 
+                  text: restaurant.isAvailable == true 
                   ? "Open"
                   : "Closed",
                   style: appStyle(12, kLightWhite, FontWeight.w600))),

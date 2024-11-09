@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:multi_vendor_app/common/restaurant_widget.dart';
-import 'package:multi_vendor_app/constants/uidata.dart';
 import 'package:multi_vendor_app/hooks/fetch_all_restaurants.dart';
-import 'package:multi_vendor_app/models/categories.dart';
 import 'package:multi_vendor_app/models/restaurant_model.dart';
 
 class NearbyRestaurants extends StatelessWidget {

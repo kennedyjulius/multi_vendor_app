@@ -8,7 +8,7 @@ import 'package:multi_vendor_app/hooks/fetch_foods.dart';
 import 'package:multi_vendor_app/models/food.dart';
 
 class FoodList extends HookWidget {
-  const FoodList({Key? key}) : super(key: key);
+  const FoodList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +23,12 @@ class FoodList extends HookWidget {
         top: 10.h,
       ),
       child: isLoading
-          ? Center(child: CircularProgressIndicator()) // Loading indicator
+          ? const Center(child: CircularProgressIndicator()) // Loading indicator
           : ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: foods?.length ?? 0, // Null safety check
+              itemCount: foods.length ?? 0, // Null safety check
               itemBuilder: (context, i) {
-                final food = foods![i]; // Non-null assertion since foods is now guaranteed to have data
+                final food = foods[i]; // Non-null assertion since foods is now guaranteed to have data
 
                 return FoodWidget(
                   imageUrl: food.imageUrl,

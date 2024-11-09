@@ -10,7 +10,7 @@ import 'package:multi_vendor_app/hooks/fetch_all_catergories.dart';
 import 'package:multi_vendor_app/models/categories.dart';
 
 class AllCategories extends HookWidget {
-  const AllCategories({Key? key}) : super(key: key);
+  const AllCategories({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -35,8 +35,8 @@ class ReccomendationsPage extends HookWidget {
             const FoodlistShimmer():
             ListView(
               scrollDirection: Axis.horizontal,
-              children: List.generate(foods!.length, (i) {
-                FoodsModel food = foods![i];
+              children: List.generate(foods.length, (i) {
+                FoodsModel food = foods[i];
                 return FoodTile(food: food);
               },),
               

@@ -57,7 +57,7 @@ class FoodTile extends StatelessWidget {
                               rating: 5,
                               itemCount: 5,
                               itemBuilder: (context, index) =>
-                                  Icon(Icons.star, color: kSecondary),
+                                  const Icon(Icons.star, color: kSecondary),
                               itemSize: 15.h,
                             ),
                           ),
@@ -74,7 +74,7 @@ class FoodTile extends StatelessWidget {
                     children: [
                       Text(
                         food.title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 11,
                           color: kDark,
                           fontWeight: FontWeight.w400,
@@ -82,7 +82,7 @@ class FoodTile extends StatelessWidget {
                       ),
                       Text(
                         "Delivery time: ${food.time}",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 11,
                           color: kGray,
                           fontWeight: FontWeight.w600,
@@ -97,7 +97,7 @@ class FoodTile extends StatelessWidget {
                           itemBuilder: (context, i) {
                             var additive = food.additives[i];
                             return Container(
-                              margin: EdgeInsets.only(
+                              margin: const EdgeInsets.only(
                                 right: 5,
                               ),
                               decoration: BoxDecoration(
