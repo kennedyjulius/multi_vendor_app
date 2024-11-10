@@ -10,6 +10,7 @@ import 'package:multi_vendor_app/controllers/category_controller.dart';
 import 'package:multi_vendor_app/home/all_fastetst_foods.dart';
 import 'package:multi_vendor_app/home/all_nearby_restaaurants.dart';
 import 'package:multi_vendor_app/home/recommendations_page.dart';
+import 'package:multi_vendor_app/home/widgets/category_food_list.dart';
 import 'package:multi_vendor_app/home/widgets/category_list.dart';
 
 class HomePage extends StatelessWidget {

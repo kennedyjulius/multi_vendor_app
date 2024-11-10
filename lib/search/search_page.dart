@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:multi_vendor_app/common/custom_container.dart';
 import 'package:multi_vendor_app/common/custom_text_field.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
@@ -20,10 +19,10 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
+  final SearchFoodController controller = Get.put(SearchFoodController());
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SearchFoodController());
     return Scaffold(
       backgroundColor: kPrimary,
       appBar: AppBar(
@@ -39,30 +38,31 @@ class _SearchPageState extends State<SearchPage> {
             hintText: "Search For Foods",
             suffixIcon: GestureDetector(
               onTap: () {
-                if (controller.isTriggered == false) {
-                controller.searchFoods(_searchController.text);
-                controller.setTriggered(true);
-                }else {
+                if (!controller.isTriggered) {
+                  controller.searchFoods(_searchController.text);
+                  controller.setTriggered(true);
+                } else {
                   controller.searchResults = null;
                   controller.setTriggered(false);
                   _searchController.clear();
                 }
-                
               },
-              child: controller.isTriggered == false
-              ?const Icon(Ionicons.search_circle, size: 40, color: kPrimary,)
-              :Icon(Ionicons.close_circle, size: 40.h, color: kRed,)
+              child: controller.isTriggered
+                  ? Icon(Ionicons.close_circle, size: 40.h, color: kRed)
+                  : Icon(Ionicons.search_circle, size: 40.h, color: kPrimary),
             ),
-            
           ),
         ),
       ),
       body: SafeArea(
         child: CustomContainer(
           color: Colors.white,
-          containerContent: controller.isLoading ?
-          : controller.searchResults == null ? const  LoadingWidget()
-          : const SearchResults()),
+          containerContent: controller.isLoading
+              ? const LoadingWidget()
+              : (controller.searchResults == null
+                  ? const FoodlistShimmer()
+                  : const SearchResults()),
+        ),
       ),
     );
   }

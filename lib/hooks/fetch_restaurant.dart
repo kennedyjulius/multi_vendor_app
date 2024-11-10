@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/models/api_error.dart';
@@ -19,7 +21,8 @@ FetchHook useFetchRestaurants(String code) {
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        restaurants.value = restaurantsModelFromJson(response.body);
+        var restaurant = jsonDecode(response.body);
+        restaurants.value = RestaurantsModel.fromJson(response.body as Map<String, dynamic>) as List<RestaurantsModel>?;
       } else {
         apiError.value = apiErrorFromJson(response.body);
       }

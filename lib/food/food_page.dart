@@ -5,6 +5,8 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:multi_vendor_app/common/custom_button.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
+import 'package:multi_vendor_app/controllers/food_controller.dart';
+import 'package:multi_vendor_app/hooks/fetch_restaurant.dart';
 import 'package:multi_vendor_app/models/food.dart';
 import 'package:multi_vendor_app/restaurant/restaurat_page.dart';
 
@@ -31,6 +33,8 @@ class _FoodPageState extends State<FoodPage> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final hookResult = useFetchRestaurants(widget.food.restaurant);
+    final controller = Get.put(FoodController());
 
     return Scaffold(
       body: ListView(

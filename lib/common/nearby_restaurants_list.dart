@@ -9,7 +9,7 @@ class NearbyRestaurants extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hookResults = useFetchRestaurants("41007428");
+    final hookResults = useFetchAllRestaurants("41007428");
     List<RestaurantsModel>? restaurants = hookResults.data?.cast<RestaurantsModel>();
     final isLoading = hookResults.isloading;
     return Container(

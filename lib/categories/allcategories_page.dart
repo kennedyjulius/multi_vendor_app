@@ -8,6 +8,7 @@ import 'package:multi_vendor_app/home/widgets/back_ground_container.dart';
 import 'package:multi_vendor_app/hooks/fetch_all_catergories.dart';
 
 import 'package:multi_vendor_app/models/categories.dart';
+import 'package:multi_vendor_app/shimmers/foodlist_shimmer.dart';
 
 class AllCategories extends HookWidget {
   const AllCategories({super.key});
@@ -40,7 +41,7 @@ class AllCategories extends HookWidget {
           ),
           height: MediaQuery.of(context).size.height,
           child: isLoading
-              ? const FoodListShimmer() // Ensure FoodListShimmer is defined in your code
+              ? const FoodlistShimmer() // Ensure FoodListShimmer is defined in your code
               : ListView.builder(
                   itemCount: categories?.length ?? 0,
                   itemBuilder: (context, i) {
