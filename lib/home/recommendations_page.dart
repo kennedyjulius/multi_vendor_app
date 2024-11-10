@@ -17,7 +17,7 @@ class ReccomendationsPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final hookResults = useFetchAllFoods("41007428");
-    List<FoodsModel>? foods = hookResults.data!.cast<FoodsModel>();
+    List<FoodsModel>? foods = Object.hash<FoodsModel>() as List<FoodsModel>?;
     final isLoading = hookResults.isLoading;
     return Scaffold(
       appBar: AppBar(

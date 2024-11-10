@@ -14,7 +14,7 @@ class CategoryFoodList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hookResult = useFetchFoodsByCategory("41007428");
-    List<FoodsModel>? foods = hookResult.data!.cast<FoodsModel>();
+    List<FoodsModel>? foods = hookResult.data.cast<FoodsModel>();
     final isLoading = hookResult.isLoading;
     return SizedBox(
       width: width,

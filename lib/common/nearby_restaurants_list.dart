@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:multi_vendor_app/common/restaurant_widget.dart';
 import 'package:multi_vendor_app/hooks/fetch_all_restaurants.dart';
 import 'package:multi_vendor_app/models/restaurant_model.dart';
+import 'package:multi_vendor_app/restaurant/restaurat_page.dart';
 
 class NearbyRestaurants extends StatelessWidget {
   const NearbyRestaurants({super.key});
@@ -24,6 +26,9 @@ class NearbyRestaurants extends StatelessWidget {
         children: List.generate(restaurants!.length, (i) {
           RestaurantsModel restaurant = restaurants[i];
           return RestaurantWidget(
+            onTap: () {
+              Get.to(RestaurantPage(restaurant: restaurant,));
+            },
             image: restaurant.imageUrl, 
             logo: restaurant.logoUrl, 
             title: restaurant.title, 

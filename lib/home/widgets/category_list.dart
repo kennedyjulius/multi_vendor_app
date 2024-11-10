@@ -15,7 +15,7 @@ class CategoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hookResult = useFetchCategories();
-    List<CategoriesModel>? categoriesList = hookResult.data;
+    List<CategoriesModel>? categoriesList = hookResult.data as List<CategoriesModel>?;
     final isLoading = hookResult.isloading;
     final error = hookResult.error;
     final controller = Get.put(CategoryController());

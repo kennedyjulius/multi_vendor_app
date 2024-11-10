@@ -13,6 +13,8 @@ import 'package:multi_vendor_app/shimmers/foodlist_shimmer.dart';
 
 class AllNearbyRestaaurants extends HookWidget {
   const AllNearbyRestaaurants({super.key});
+  
+  String get code => code;
 
   @override
   Widget build(BuildContext context) {
