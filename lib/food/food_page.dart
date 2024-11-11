@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:multi_vendor_app/common/custom_button.dart';
+import 'package:multi_vendor_app/common/custom_text_field.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/controllers/food_controller.dart';
 import 'package:multi_vendor_app/home/widgets/app_style.dart';
@@ -11,7 +12,6 @@ import 'package:multi_vendor_app/home/widgets/reusable_text.dart';
 import 'package:multi_vendor_app/hooks/fetch_restaurant.dart';
 import 'package:multi_vendor_app/models/food.dart';
 import 'package:multi_vendor_app/models/hook_models/hook_result.dart';
-import 'package:multi_vendor_app/restaurant/restaurant_page.dart';
 import 'package:multi_vendor_app/restaurant/restaurat_page.dart';
 
 class FoodPage extends StatefulWidget {
@@ -26,7 +26,15 @@ class FoodPage extends StatefulWidget {
 
 class _FoodPageState extends State<FoodPage> {
   final PageController _pageController = PageController();
+  final TextEditingController _preferences = TextEditingController();
   int _currentIndex = 0;
+  final List<bool> _selectedAdditives = []; // To track selected additives
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedAdditives.addAll(List.filled(widget.food.additives.length, false));
+  }
 
   @override
   void dispose() {
@@ -45,7 +53,7 @@ class _FoodPageState extends State<FoodPage> {
         padding: EdgeInsets.zero,
         children: [
           _buildImageSlider(width),
-          _buildDetailsSection(),
+          _buildDetailsSection(controller),
           _buildTagsList(),
           _buildOpenRestaurantButton(hookResult),
         ],
@@ -124,7 +132,7 @@ class _FoodPageState extends State<FoodPage> {
     );
   }
 
-  Widget _buildDetailsSection() {
+  Widget _buildDetailsSection(FoodController controller) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
       child: Column(
@@ -138,9 +146,11 @@ class _FoodPageState extends State<FoodPage> {
                   style: appStyle(18, kDark, FontWeight.w600),
                 ),
               ),
-              ReusableText(
-                text: "\$${widget.food.price.toStringAsFixed(2)}",
-                style: appStyle(18, kPrimary, FontWeight.w600),
+              Obx(
+                () => ReusableText(
+                  text: "\$${widget.food.price * controller.count.value}",
+                  style: appStyle(18, kPrimary, FontWeight.w600),
+                ),
               ),
             ],
           ),
@@ -149,9 +159,125 @@ class _FoodPageState extends State<FoodPage> {
             text: widget.food.description,
             style: appStyle(11, kGray, FontWeight.w400),
           ),
+          SizedBox(height: 15.h),
+          ReusableText(
+            text: "Additives and Toppings",
+            style: appStyle(18, kDark, FontWeight.w600),
+          ),
+          SizedBox(height: 10),
+          ..._buildAdditivesList(),
+          SizedBox(height: 20.h),
+          Row(
+            children: [
+              Expanded(
+                child: ReusableText(
+                  text: "Quantity",
+                  style: appStyle(11, kDark, FontWeight.w400),
+                ),
+              ),
+              SizedBox(width: 5.w),
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      controller.increment();
+                    },
+                    child: Icon(AntDesign.pluscircleo),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Obx(
+                      () => ReusableText(
+                        text: "${controller.count.value}",
+                        style: appStyle(14, kDark, FontWeight.w600),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      controller.decrement();
+                    },
+                    child: Icon(AntDesign.minuscircleo),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: 20.h),
+          ReusableText(text: "Preferences", style: appStyle(18, kDark, FontWeight.w600)),
+          SizedBox(height: 5.h),
+          SizedBox(
+            height: 65.h,
+            child: CustomTextField(
+              hintText: "Add a note with your preferences",
+              controller: _preferences,
+              maxLines: 3,
+            ),
+          ),
+          SizedBox(height: 10.h),
+          Container(
+            height: 40.h,
+            decoration: BoxDecoration(
+              color: kPrimary,
+              borderRadius: BorderRadius.circular(30.r),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    ShowVerificationSheet(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: ReusableText(text: "Place Order", style: appStyle(18, kLightWhite, FontWeight.w600)),
+                  ),
+                ),
+                CircleAvatar(
+                  backgroundColor: kLightWhite,
+                  radius: 20.r,
+                  child: Icon(Ionicons.cart, color: kPrimary,),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  List<Widget> _buildAdditivesList() {
+    return List.generate(widget.food.additives.length, (index) {
+      final additive = widget.food.additives[index];
+      return CheckboxListTile(
+        contentPadding: EdgeInsets.zero,
+        visualDensity: VisualDensity.compact,
+        dense: true,
+        activeColor: kPrimary,
+        tristate: false,
+        value: _selectedAdditives[index],
+        title: Row(
+          children: [
+            Expanded(
+              child: ReusableText(
+                text: additive.title,
+                style: appStyle(11, kDark, FontWeight.w400),
+              ),
+            ),
+            SizedBox(width: 5.w),
+            ReusableText(
+              text: "\$${additive.price}",
+              style: appStyle(11, kSecondary, FontWeight.w400),
+            ),
+          ],
+        ),
+        onChanged: (bool? value) {
+          setState(() {
+            _selectedAdditives[index] = value ?? false;
+          });
+        },
+      );
+    });
   }
 
   Widget _buildTagsList() {
@@ -164,8 +290,10 @@ class _FoodPageState extends State<FoodPage> {
           itemCount: widget.food.foodTags.length,
           itemBuilder: (context, index) {
             return Container(
+              height: 15.h,
+              width: 50.w,
               margin: EdgeInsets.only(right: 5.w),
-              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
               decoration: BoxDecoration(
                 color: kPrimary,
                 borderRadius: BorderRadius.circular(15.r),
@@ -199,4 +327,15 @@ class _FoodPageState extends State<FoodPage> {
       ),
     );
   }
+}
+
+void ShowVerificationSheet(BuildContext context) {
+  return showModalBottomSheet(
+      context: context, 
+      builder: (context) {
+        return Container(
+          height: 500.h,
+        );
+      },
+    );
 }
