@@ -1,15 +1,11 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
-import 'package:multi_vendor_app/constants/uidata.dart';
 import 'package:multi_vendor_app/controllers/category_controller.dart';
 import 'package:multi_vendor_app/models/api_error.dart';
-import 'package:multi_vendor_app/models/categories.dart';
 import 'package:multi_vendor_app/models/food.dart';
 import 'package:multi_vendor_app/models/hook_models/hook_result.dart';
 import 'package:http/http.dart' as http;
-import 'package:multi_vendor_app/models/restaurant_model.dart';
 
 FetchHook useFetchFoodsByCategory(String code) {
   final controller = Get.put(CategoryController());

@@ -19,7 +19,7 @@ class AllNearbyRestaaurants extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final hookResults = useFetchAllRestaurants(code);
-    List<RestaurantsModel>? restaurants = hookResults.data!.cast<RestaurantsModel>();
+    List<RestaurantsModel>? restaurants = hookResults.data.cast<RestaurantsModel>();
     final isLoading = hookResults.isLoading;
     return Scaffold(
       appBar: AppBar(

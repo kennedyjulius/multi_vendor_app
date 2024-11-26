@@ -18,7 +18,7 @@ class AllFastetstFoods extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final hookResult = useFetchAllFoods("41007428");
-    List<FoodsModel>? foods = hookResult.data!.cast<FoodsModel>();
+    List<FoodsModel>? foods = hookResult.data.cast<FoodsModel>();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

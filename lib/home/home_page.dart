@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
               Get.to(const ReccomendationsPage());
             },
             ),
-            CategoryFoodList()
+            const CategoryFoodList()
         ],
         )
         )

@@ -15,7 +15,7 @@ class FoodList extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final hookResults = useFetchFoods("41007428");
-    List<FoodsModel>? foods = hookResults.data!.cast<FoodsModel>();
+    List<FoodsModel>? foods = hookResults.data.cast<FoodsModel>();
     final isLoading = hookResults.isloading;
 
     return Container(

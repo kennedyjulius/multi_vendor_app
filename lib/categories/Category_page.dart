@@ -21,7 +21,7 @@ class CategoryPage extends HookWidget {
     final hookResult = useFetchFoodsByCategory("41007428");
 
     // Casting hookResult data
-    List<FoodsModel>? foods = hookResult.data?.cast<FoodsModel>();
+    List<FoodsModel>? foods = hookResult.data.cast<FoodsModel>();
     final isLoading = hookResult.isLoading;
 
     final width = MediaQuery.of(context).size.width;
@@ -41,7 +41,7 @@ class CategoryPage extends HookWidget {
             controller.updateCategory = '';
             controller.updateTitle = '';
           },
-          icon: Icon(Icons.arrow_back_ios, color: kDark),
+          icon: const Icon(Icons.arrow_back_ios, color: kDark),
         ),
       ),
       body: BackGroundContainer(
@@ -56,9 +56,9 @@ class CategoryPage extends HookWidget {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: List.generate(
-                      foods?.length ?? 0,
+                      foods.length ?? 0,
                       (i) {
-                        var food = foods![i];
+                        var food = foods[i];
                         return FoodTile(food: food);
                       },
                     ),

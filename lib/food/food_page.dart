@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
+import 'package:multi_vendor_app/auth/phone_verfication_page.dart';
 import 'package:multi_vendor_app/common/custom_button.dart';
 import 'package:multi_vendor_app/common/custom_text_field.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
@@ -28,7 +28,7 @@ class _FoodPageState extends State<FoodPage> {
   final PageController _pageController = PageController();
   final TextEditingController _preferences = TextEditingController();
   int _currentIndex = 0;
-  final List<bool> _selectedAdditives = []; // To track selected additives
+  final List<bool> _selectedAdditives = []; // Track selected additives
 
   @override
   void initState() {
@@ -39,6 +39,7 @@ class _FoodPageState extends State<FoodPage> {
   @override
   void dispose() {
     _pageController.dispose();
+    _preferences.dispose();
     super.dispose();
   }
 
@@ -84,6 +85,8 @@ class _FoodPageState extends State<FoodPage> {
                   height: 230.h,
                   fit: BoxFit.cover,
                   imageUrl: widget.food.imageUrl[i],
+                  placeholder: (context, url) => const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 );
               },
             ),
@@ -124,8 +127,8 @@ class _FoodPageState extends State<FoodPage> {
       left: 12,
       child: GestureDetector(
         onTap: () => Get.back(),
-        child: Icon(
-          Ionicons.chevron_back_circle,
+        child: const Icon(
+          Icons.arrow_back_ios_new,
           color: kDark,
         ),
       ),
@@ -138,22 +141,7 @@ class _FoodPageState extends State<FoodPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: ReusableText(
-                  text: widget.food.title,
-                  style: appStyle(18, kDark, FontWeight.w600),
-                ),
-              ),
-              Obx(
-                () => ReusableText(
-                  text: "\$${widget.food.price * controller.count.value}",
-                  style: appStyle(18, kPrimary, FontWeight.w600),
-                ),
-              ),
-            ],
-          ),
+          _buildFoodTitleAndPrice(controller),
           SizedBox(height: 15.h),
           ReusableText(
             text: widget.food.description,
@@ -164,85 +152,138 @@ class _FoodPageState extends State<FoodPage> {
             text: "Additives and Toppings",
             style: appStyle(18, kDark, FontWeight.w600),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           ..._buildAdditivesList(),
           SizedBox(height: 20.h),
-          Row(
-            children: [
-              Expanded(
-                child: ReusableText(
-                  text: "Quantity",
-                  style: appStyle(11, kDark, FontWeight.w400),
-                ),
-              ),
-              SizedBox(width: 5.w),
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      controller.increment();
-                    },
-                    child: Icon(AntDesign.pluscircleo),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Obx(
-                      () => ReusableText(
-                        text: "${controller.count.value}",
-                        style: appStyle(14, kDark, FontWeight.w600),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      controller.decrement();
-                    },
-                    child: Icon(AntDesign.minuscircleo),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          _buildQuantitySelector(controller),
           SizedBox(height: 20.h),
-          ReusableText(text: "Preferences", style: appStyle(18, kDark, FontWeight.w600)),
-          SizedBox(height: 5.h),
-          SizedBox(
-            height: 65.h,
-            child: CustomTextField(
-              hintText: "Add a note with your preferences",
-              controller: _preferences,
-              maxLines: 3,
-            ),
-          ),
+          _buildPreferencesField(),
           SizedBox(height: 10.h),
-          Container(
-            height: 40.h,
-            decoration: BoxDecoration(
-              color: kPrimary,
-              borderRadius: BorderRadius.circular(30.r),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    ShowVerificationSheet(context);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: ReusableText(text: "Place Order", style: appStyle(18, kLightWhite, FontWeight.w600)),
-                  ),
-                ),
-                CircleAvatar(
-                  backgroundColor: kLightWhite,
-                  radius: 20.r,
-                  child: Icon(Ionicons.cart, color: kPrimary,),
-                ),
-              ],
-            ),
-          ),
+          _buildPlaceOrderButton(),
         ],
       ),
+    );
+  }
+
+  Widget _buildFoodTitleAndPrice(FoodController controller) {
+    return Row(
+      children: [
+        Expanded(
+          child: ReusableText(
+            text: widget.food.title,
+            style: appStyle(18, kDark, FontWeight.w600),
+          ),
+        ),
+        Obx(
+          () => ReusableText(
+            text: "\$${widget.food.price * controller.count.value}",
+            style: appStyle(18, kPrimary, FontWeight.w600),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildQuantitySelector(FoodController controller) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        ReusableText(
+          text: "Quantity",
+          style: appStyle(11, kDark, FontWeight.w400),
+        ),
+        Row(
+          children: [
+            GestureDetector(
+              onTap: controller.increment,
+              child: const Icon(Icons.add_circle),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Obx(() => Text("${controller.count.value}")),
+            ),
+            GestureDetector(
+              onTap: controller.decrement,
+              child: const Icon(Icons.remove_circle),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPreferencesField() {
+    return SizedBox(
+      height: 65.h,
+      child: CustomTextField(
+        hintText: "Add your preferences",
+        controller: _preferences,
+        maxLines: 3,
+      ),
+    );
+  }
+
+  Future<dynamic> showVerificationSheet(BuildContext) {
+    return showModalBottomSheet(
+      showDragHandle: true,
+      backgroundColor: Colors.transparent,
+      context: context, 
+    builder: (context) {
+      return Container(
+        height: 500,
+        width: width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12.r),
+            topRight: Radius.circular(12.r),
+          ),
+          color: kLightWhite,
+          image: DecorationImage(
+            image: AssetImage("assets/images/foodly.png"),
+            fit: BoxFit.fill,
+            ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(8.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 10.h,
+              ),
+              ReusableText(
+                text: "Verify your Phone Number", 
+                style: appStyle(18, kPrimary, FontWeight.w600)
+                ),
+                SizedBox(
+                  height: 250.h,
+                  child: List.generate(verificationResons.length, (index) {
+                    return ListTile(
+                      leading: Icon(Icons.check_circle_outline, kPrimary),
+                      title: Text(
+                        verificationResons[index],
+                        textAlign: TextAlign.justify,
+                        style: appStyle(11, kGrayLight, FontWeight.normal),
+                      ),
+                    );
+                  },),
+                ),
+
+                SizedBox(height: 10.h,),
+
+                CustomButton(
+                  btnHeight: 35.h,
+                  btnWidth: width, 
+                  text: "Verify Phone Number",
+                  onTap: () {
+                    Get.to(PhoneVerficationPage());
+                  },
+                  )
+            ],
+          ),
+          ),
+      );
+    },
     );
   }
 
@@ -250,28 +291,9 @@ class _FoodPageState extends State<FoodPage> {
     return List.generate(widget.food.additives.length, (index) {
       final additive = widget.food.additives[index];
       return CheckboxListTile(
-        contentPadding: EdgeInsets.zero,
-        visualDensity: VisualDensity.compact,
-        dense: true,
-        activeColor: kPrimary,
-        tristate: false,
         value: _selectedAdditives[index],
-        title: Row(
-          children: [
-            Expanded(
-              child: ReusableText(
-                text: additive.title,
-                style: appStyle(11, kDark, FontWeight.w400),
-              ),
-            ),
-            SizedBox(width: 5.w),
-            ReusableText(
-              text: "\$${additive.price}",
-              style: appStyle(11, kSecondary, FontWeight.w400),
-            ),
-          ],
-        ),
-        onChanged: (bool? value) {
+        title: Text("${additive.title} (\$${additive.price})"),
+        onChanged: (value) {
           setState(() {
             _selectedAdditives[index] = value ?? false;
           });
@@ -283,59 +305,21 @@ class _FoodPageState extends State<FoodPage> {
   Widget _buildTagsList() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w),
-      child: SizedBox(
-        height: 30.h,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: widget.food.foodTags.length,
-          itemBuilder: (context, index) {
-            return Container(
-              height: 15.h,
-              width: 50.w,
-              margin: EdgeInsets.only(right: 5.w),
-              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
-              decoration: BoxDecoration(
-                color: kPrimary,
-                borderRadius: BorderRadius.circular(15.r),
-              ),
-              child: Center(
-                child: ReusableText(
-                  text: widget.food.foodTags[index],
-                  style: appStyle(11, kWhite, FontWeight.w400),
-                ),
-              ),
-            );
-          },
-        ),
+      child: Wrap(
+        spacing: 8.0,
+        children: widget.food.foodTags.map((tag) {
+          return Chip(
+            label: Text(tag),
+          );
+        }).toList(),
       ),
     );
   }
 
   Widget _buildOpenRestaurantButton(FetchHook hookResult) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 15.h),
-      child: CustomButton(
-        btnWidth: 200.w,
-        text: 'Open Restaurant',
-        onTap: () {
-          if (hookResult.data != null) {
-            Get.to(RestaurantPage(restaurant: hookResult.data));
-          } else {
-            Get.snackbar("Error", "Restaurant data not loaded yet.");
-          }
-        },
-      ),
+    return CustomButton(
+      text: "Open Restaurant",
+      onTap: () => Get.to(() => RestaurantPage(restaurant: hookResult.data)), btnWidth: width,
     );
   }
-}
-
-void ShowVerificationSheet(BuildContext context) {
-  return showModalBottomSheet(
-      context: context, 
-      builder: (context) {
-        return Container(
-          height: 500.h,
-        );
-      },
-    );
 }

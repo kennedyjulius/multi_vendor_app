@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:multi_vendor_app/models/api_error.dart';
-import 'package:multi_vendor_app/models/categories.dart';
 import 'package:multi_vendor_app/models/restaurant_model.dart';
 
 class FetchRestaurant {

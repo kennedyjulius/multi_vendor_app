@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:multi_vendor_app/common/food_list.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/home/widgets/food_tile.dart';
-import 'package:multi_vendor_app/hooks/fetch_all_foods.dart';
 import 'package:multi_vendor_app/hooks/fetch_category_foods.dart';
 import 'package:multi_vendor_app/models/food.dart';
 import 'package:multi_vendor_app/shimmers/foodlist_shimmer.dart';
