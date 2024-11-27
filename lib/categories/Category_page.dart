@@ -56,7 +56,7 @@ class CategoryPage extends HookWidget {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: List.generate(
-                      foods.length ?? 0,
+                      foods!.length,
                       (i) {
                         var food = foods[i];
                         return FoodTile(food: food);

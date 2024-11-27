@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'package:multi_vendor_app/constants/uidata.dart';
+
 import 'package:multi_vendor_app/food/food_page.dart';
 import 'package:multi_vendor_app/home/widgets/food_widget.dart';
 import 'package:multi_vendor_app/hooks/fetch_foods.dart';
@@ -16,7 +16,7 @@ class FoodList extends HookWidget {
   Widget build(BuildContext context) {
     final hookResults = useFetchFoods("41007428");
     List<FoodsModel>? foods = hookResults.data.cast<FoodsModel>();
-    final isLoading = hookResults.isloading;
+    final isLoading = hookResults.isLoading;
 
     return Container(
       height: 180.h,
@@ -28,7 +28,7 @@ class FoodList extends HookWidget {
           ? const Center(child: CircularProgressIndicator()) // Loading indicator
           : ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: foods.length ?? 0, // Null safety check
+              itemCount: foods!.length, // Null safety check
               itemBuilder: (context, i) {
                 final food = foods[i]; // Non-null assertion since foods is now guaranteed to have data
 

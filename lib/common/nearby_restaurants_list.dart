@@ -13,7 +13,7 @@ class NearbyRestaurants extends StatelessWidget {
   Widget build(BuildContext context) {
     final hookResults = useFetchAllRestaurants("41007428");
     List<RestaurantsModel>? restaurants = hookResults.data.cast<RestaurantsModel>();
-    final isLoading = hookResults.isloading;
+    final isLoading = hookResults.isLoading;
     return Container(
       color: Colors.white,
       height: 194.h,
@@ -23,7 +23,7 @@ class NearbyRestaurants extends StatelessWidget {
       ),
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: List.generate(restaurants.length, (i) {
+        children: List.generate(restaurants!.length, (i) {
           RestaurantsModel restaurant = restaurants[i];
           return RestaurantWidget(
             onTap: () {

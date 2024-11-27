@@ -29,10 +29,12 @@ class _FoodPageState extends State<FoodPage> {
   final TextEditingController _preferences = TextEditingController();
   int _currentIndex = 0;
   final List<bool> _selectedAdditives = []; // Track selected additives
+  late final FoodController controller; // Declare controller
 
   @override
   void initState() {
     super.initState();
+    controller = Get.put(FoodController()); // Initialize controller
     _selectedAdditives.addAll(List.filled(widget.food.additives.length, false));
   }
 
@@ -47,7 +49,7 @@ class _FoodPageState extends State<FoodPage> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final hookResult = useFetchRestaurants(widget.food.restaurant);
-    final controller = Get.put(FoodController());
+    controller.loadAdditives(widget.food.additives); // Add the missing argument
 
     return Scaffold(
       body: ListView(
@@ -256,18 +258,20 @@ class _FoodPageState extends State<FoodPage> {
                 style: appStyle(18, kPrimary, FontWeight.w600)
                 ),
                 SizedBox(
-                  height: 250.h,
-                  child: List.generate(verificationResons.length, (index) {
-                    return ListTile(
-                      leading: Icon(Icons.check_circle_outline, kPrimary),
-                      title: Text(
-                        verificationResons[index],
-                        textAlign: TextAlign.justify,
-                        style: appStyle(11, kGrayLight, FontWeight.normal),
-                      ),
-                    );
-                  },),
-                ),
+            height: 250.h,
+            child: Column( // Wrap List.generate with Column
+              children: List.generate(verificationResons.length, (index) {
+                return ListTile(
+                  leading: Icon(Icons.check_circle_outline, color: kPrimary),
+                  title: Text(
+                    verificationResons[index],
+                    textAlign: TextAlign.justify,
+                    style: appStyle(11, kGrayLight, FontWeight.normal),
+                  ),
+                );
+              }),
+            ),
+          ),
 
                 SizedBox(height: 10.h,),
 
@@ -322,4 +326,17 @@ class _FoodPageState extends State<FoodPage> {
       onTap: () => Get.to(() => RestaurantPage(restaurant: hookResult.data)), btnWidth: width,
     );
   }
+
+  Widget _buildPlaceOrderButton() {
+    return CustomButton(
+      text: "Place Order",
+      onTap: () {
+        // Define what happens when the button is tapped
+        print("Order placed!");
+      },
+      btnWidth: MediaQuery.of(context).size.width,
+    );
+  }
 }
+
+

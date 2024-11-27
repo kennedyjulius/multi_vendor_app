@@ -6,7 +6,7 @@ import 'package:multi_vendor_app/models/hook_models/hook_result.dart';
 import 'package:http/http.dart' as http;
 
 FetchHook useFetchAllCategories() {
-  final categoriesItems = useState<List<CategoriesModel>?>(null);
+  final categoriesItems = useState(CategoriesModel);
   final isLoading = useState<bool>(false);
   final error = useState<Exception?>(null);
   final apiError = useState<ApiError?>(null);
@@ -19,7 +19,7 @@ FetchHook useFetchAllCategories() {
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        categoriesItems.value = categoriesModelFromJson(response.body);
+        categoriesItems.value = categoriesModelFromJson(response.body) as Type;
       } else {
         apiError.value = apiErrorFromJson(response.body);
       }
@@ -38,12 +38,12 @@ FetchHook useFetchAllCategories() {
   void refetch() {
     fetchData();
   }
-
   return FetchHook(
-    data: categoriesItems.value,
+    data: categoriesItems.value as CategoriesModel,
     isLoading: isLoading.value,
     error: error.value,
-    refetch: refetch, isloading: false,
+    refetch: refetch,
     
   );
+ 
 }

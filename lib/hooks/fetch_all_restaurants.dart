@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:multi_vendor_app/models/restaurant_model.dart';
 
 FetchHook useFetchAllRestaurants(String code) {
-  final restaurants = useState<List<RestaurantsModel>?>(null);
+  final restaurants = useState(RestaurantsModel);
   final isLoading = useState<bool>(false);
   final error = useState<Exception?>(null);
   final apiError = useState<ApiError?>(null);
@@ -19,7 +19,7 @@ FetchHook useFetchAllRestaurants(String code) {
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        restaurants.value = restaurantsModelFromJson(response.body);
+        restaurants.value = restaurantsModelFromJson(response.body) as Type;
       } else {
         apiError.value = apiErrorFromJson(response.body);
       }
@@ -36,6 +36,7 @@ FetchHook useFetchAllRestaurants(String code) {
   }, []);
 
   void refetch() {
+    isLoading.value = true;
     fetchData();
   }
 
@@ -43,7 +44,7 @@ FetchHook useFetchAllRestaurants(String code) {
     data: restaurants.value,
     isLoading: isLoading.value,
     error: error.value,
-    refetch: refetch, isloading: false,
+    refetch: refetch,
     
   );
 }

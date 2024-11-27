@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
-import 'package:multi_vendor_app/constants/uidata.dart';
 import 'package:multi_vendor_app/home/widgets/app_style.dart';
 import 'package:multi_vendor_app/home/widgets/back_ground_container.dart';
 import 'package:multi_vendor_app/home/widgets/restaurant_tile.dart';
@@ -38,7 +37,7 @@ class AllNearbyRestaaurants extends HookWidget {
             const FoodlistShimmer()
             : ListView(
               scrollDirection: Axis.horizontal,
-              children: List.generate(restaurants.length, (i) {
+              children: List.generate(restaurants!.length, (i) {
                 RestaurantsModel restaurant = restaurants[i];
                 return RestaurantTile(restaurant: restaurant,);
               },),

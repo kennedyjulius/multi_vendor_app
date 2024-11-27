@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
@@ -21,13 +20,13 @@ FetchHook useFetchRestaurants(String code) {
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        var restaurant = jsonDecode(response.body);
-        restaurants.value = RestaurantsModel.fromJson(response.body as Map<String, dynamic>) as List<RestaurantsModel>?;
+        
+        restaurants.value = restaurantsModelFromJson(response.body);
       } else {
         apiError.value = apiErrorFromJson(response.body);
       }
     } catch (e) {
-      error.value = e is Exception ? e : Exception('Unknown error');
+      error.value = e as Exception;
     } finally {
       isLoading.value = false;
     }
@@ -39,6 +38,7 @@ FetchHook useFetchRestaurants(String code) {
   }, []);
 
   void refetch() {
+    isLoading.value = true;
     fetchData();
   }
 
@@ -46,7 +46,7 @@ FetchHook useFetchRestaurants(String code) {
     data: restaurants.value,
     isLoading: isLoading.value,
     error: error.value,
-    refetch: refetch, isloading: false,
+    refetch: refetch,
     
   );
 }

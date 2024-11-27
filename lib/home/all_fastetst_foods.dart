@@ -35,7 +35,7 @@ class AllFastetstFoods extends HookWidget {
             const FoodlistShimmer() :
             ListView(
               scrollDirection: Axis.horizontal,
-              children: List.generate(foods.length, (i) {
+              children: List.generate(foods!.length, (i) {
                 var food = foods[i];
                 return FoodTile(food: food);
               },),

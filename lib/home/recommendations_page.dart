@@ -16,7 +16,7 @@ class ReccomendationsPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final hookResults = useFetchAllFoods("41007428");
-    List<FoodsModel>? foods = Object.hash<FoodsModel>() as List<FoodsModel>?;
+    List<FoodsModel>? foods = hookResults.data; // Correctly assign the fetched data to foods
     final isLoading = hookResults.isLoading;
     return Scaffold(
       appBar: AppBar(
@@ -34,7 +34,7 @@ class ReccomendationsPage extends HookWidget {
             const FoodlistShimmer():
             ListView(
               scrollDirection: Axis.horizontal,
-              children: List.generate(foods.length, (i) {
+              children: List.generate(foods!.length, (i) {
                 FoodsModel food = foods[i];
                 return FoodTile(food: food);
               },),

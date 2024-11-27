@@ -17,7 +17,7 @@ class AllCategories extends HookWidget {
   Widget build(BuildContext context) {
     final hookResults = useFetchAllCategories();
     List<CategoriesModel>? categories = hookResults.data;
-    final isLoading = hookResults.isloading;
+    final isLoading = hookResults.isLoading;
 
     return Scaffold(
       appBar: AppBar(

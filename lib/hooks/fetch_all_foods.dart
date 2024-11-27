@@ -6,7 +6,7 @@ import 'package:multi_vendor_app/models/hook_models/hook_result.dart';
 import 'package:http/http.dart' as http;
 
 FetchHook useFetchAllFoods(String code) {
-  final foods = useState<List<FoodsModel>?>(null);
+  final foods = useState<FoodsModel?>(null);
   final isLoading = useState<bool>(false);
   final error = useState<Exception?>(null);
   final apiError = useState<ApiError?>(null);
@@ -19,7 +19,7 @@ FetchHook useFetchAllFoods(String code) {
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        foods.value = foodsModelFromJson(response.body);
+        foods.value = foodsModelFromJson(response.body) as FoodsModel?; // Removed unnecessary cast
       } else {
         apiError.value = apiErrorFromJson(response.body);
       }
@@ -33,18 +33,17 @@ FetchHook useFetchAllFoods(String code) {
   useEffect(() {
     fetchData();
     return null;
-  }, []);
+  }, [code]); // Dependency ensures fetchData runs when the code changes
 
   void refetch() {
+    isLoading.value = true;
     fetchData();
   }
 
   return FetchHook(
-    data: foods.value,
-    isLoading: isLoading.value,
-    error: error.value,
-    refetch: refetch, 
-    isloading: false,
-    
-  );
+    data: foods.value, 
+    isLoading: isLoading.value, 
+    error: error.value, 
+    refetch: refetch
+    );
 }

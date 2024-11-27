@@ -36,14 +36,14 @@ FetchHook useFetchCategories() {
   }, []);
 
   void refetch() {
+    isLoading.value = true;
     fetchData();
   }
 
   return FetchHook(
-    data: categoriesItems.value,
-    isLoading: isLoading.value,
-    error: error.value,
-    refetch: refetch, isloading: false,
-    
-  );
+    data: categoriesItems.value, 
+    error: error.value, 
+    refetch: refetch, 
+    isLoading: isLoading.value
+    );
 }

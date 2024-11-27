@@ -114,6 +114,7 @@ class RestaurantTile extends StatelessWidget {
               width: 60,
               height: 19.h,
               decoration: BoxDecoration(
+                // ignore: unnecessary_null_comparison
                 color: restaurant.isAvailable == true || restaurant.isAvailable != null? kPrimary :kSecondaryLight,
                 borderRadius: BorderRadius.circular(10.r),
               ),

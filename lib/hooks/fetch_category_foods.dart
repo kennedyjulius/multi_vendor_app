@@ -40,6 +40,7 @@ FetchHook useFetchFoodsByCategory(String code) {
   }, []);
 
   void refetch() {
+    isLoading.value = true;
     fetchData();
   }
 
@@ -48,7 +49,7 @@ FetchHook useFetchFoodsByCategory(String code) {
     isLoading: isLoading.value,
     error: error.value,
     refetch: refetch, 
-    isloading: false,
+    
     
   );
 }

@@ -1,8 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:multi_vendor_app/models/hook_models/additive_obs.dart';
-
 List<FoodsModel> foodsModelFromJson(String str) =>
     List<FoodsModel>.from(json.decode(str).map((x) => FoodsModel.fromJson(x)));
 
@@ -75,10 +73,34 @@ class FoodsModel {
         "ratingCount": ratingCount,
         "description": description,
         "price": price,
-        "additives": List<dynamic>.from(additives.map((x) => x?.toJson())),
+        "additives": List<dynamic>.from(additives.map((x) => x.toJson())),
         "imageUrl": imageUrl,
         "category": category,
         "time": time,
       };
 }
 
+class Additive {
+  final int id;
+  final String title;
+  final String price;
+
+  Additive({
+    required this.id,
+    required this.title,
+    required this.price,
+  });
+
+  factory Additive.fromJson(Map<String, dynamic> json) => Additive(
+
+        id: json["id"], 
+        title: json['title'], 
+        price: json["price"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": id,
+        "title": title,
+        "price": price
+      };
+}
