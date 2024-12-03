@@ -13,6 +13,7 @@ import 'package:multi_vendor_app/hooks/fetch_restaurant.dart';
 import 'package:multi_vendor_app/models/food.dart';
 import 'package:multi_vendor_app/models/hook_models/hook_result.dart';
 import 'package:multi_vendor_app/restaurant/restaurat_page.dart';
+import 'additive_obs.dart';
 
 class FoodPage extends StatefulWidget {
   const FoodPage({super.key, required this.food, this.color});
@@ -28,15 +29,12 @@ class _FoodPageState extends State<FoodPage> {
   final PageController _pageController = PageController();
   final TextEditingController _preferences = TextEditingController();
   int _currentIndex = 0;
-  final List<bool> _selectedAdditives = []; // Track selected additives
-  late final FoodController controller; // Declare controller
+  // Track selected additives
+  
+  final foodcontroller = Get.put(FoodController()); 
+  // Declare controller
 
-  @override
-  void initState() {
-    super.initState();
-    controller = Get.put(FoodController()); // Initialize controller
-    _selectedAdditives.addAll(List.filled(widget.food.additives.length, false));
-  }
+  
 
   @override
   void dispose() {
@@ -45,18 +43,20 @@ class _FoodPageState extends State<FoodPage> {
     super.dispose();
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final hookResult = useFetchRestaurants(widget.food.restaurant);
-    controller.loadAdditives(widget.food.additives); // Add the missing argument
+    foodcontroller.loadAdditives(widget.food.additives); // Add the missing argument
 
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
           _buildImageSlider(width),
-          _buildDetailsSection(controller),
+          _buildDetailsSection(foodcontroller),
           _buildTagsList(),
           _buildOpenRestaurantButton(hookResult),
         ],
@@ -155,7 +155,7 @@ class _FoodPageState extends State<FoodPage> {
             style: appStyle(18, kDark, FontWeight.w600),
           ),
           const SizedBox(height: 10),
-          ..._buildAdditivesList(),
+          Obx(() => Column(children: _buildAdditivesList()),),
           SizedBox(height: 20.h),
           _buildQuantitySelector(controller),
           SizedBox(height: 20.h),
@@ -295,12 +295,28 @@ class _FoodPageState extends State<FoodPage> {
     return List.generate(widget.food.additives.length, (index) {
       final additive = widget.food.additives[index];
       return CheckboxListTile(
-        value: _selectedAdditives[index],
-        title: Text("${additive.title} (\$${additive.price})"),
-        onChanged: (value) {
-          setState(() {
-            _selectedAdditives[index] = value ?? false;
-          });
+        contentPadding: EdgeInsets.zero,
+        visualDensity: VisualDensity.compact,
+        dense: true,
+        activeColor: kSecondary,
+        tristate: false,
+        value: additive.isChanged.value,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ReusableText(
+              text: additive.title, 
+              style: appStyle(11, kDark, FontWeight.w400),
+            ),
+            SizedBox(width: 5),
+            ReusableText(
+              text: "\ ${additive.price}", 
+              style: appStyle(11, kPrimary, FontWeight.bold),
+            ),
+          ],
+        ),
+        onChanged: (bool? value) {
+          additive.toggleChecked();
         },
       );
     });

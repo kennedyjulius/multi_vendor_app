@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:multi_vendor_app/models/food.dart';
-import 'package:multi_vendor_app/models/hook_models/additive_obs.dart';
+import 'package:multi_vendor_app/food/additive_obs.dart';
 
 class FoodController extends GetxController {
   RxInt currentPage = 0.obs;
