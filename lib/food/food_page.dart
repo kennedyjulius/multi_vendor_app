@@ -13,7 +13,7 @@ import 'package:multi_vendor_app/hooks/fetch_restaurant.dart';
 import 'package:multi_vendor_app/models/food.dart';
 import 'package:multi_vendor_app/models/hook_models/hook_result.dart';
 import 'package:multi_vendor_app/restaurant/restaurat_page.dart';
-import 'additive_obs.dart';
+import '../models/hook_models/additive_obs.dart';
 
 class FoodPage extends StatefulWidget {
   const FoodPage({super.key, required this.food, this.color});
@@ -317,6 +317,7 @@ class _FoodPageState extends State<FoodPage> {
         ),
         onChanged: (bool? value) {
           additive.toggleChecked();
+          foodcontroller.getTotalPrice();
         },
       );
     });

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:multi_vendor_app/models/food.dart';
-import 'package:multi_vendor_app/food/additive_obs.dart';
+import 'package:multi_vendor_app/models/hook_models/additive_obs.dart';
 
 class FoodController extends GetxController {
   RxInt currentPage = 0.obs;
@@ -40,5 +40,40 @@ class FoodController extends GetxController {
     }
   }
 }
+
+
+List<String> getList(){
+  List<String> ads = [];
+
+
+  for (var additive in additivesList) {
+    if (additive.isChecked.value && !ads.contains(additive.title)) {
+    ads.add(additive.title);
+    }else if (!additive.isChecked.value && ads.contains(additive.title)) {
+    ads.remove(additive.title);
+    }
+  }
+  return ads;
 }
+
+RxDouble _totalPrice = 0.0.obs;
+
+double get additivePrice => _totalPrice.value;
+
+set setTotalPrice(double newPrice) {
+  _totalPrice.value = newPrice;
+}
+
+double getTotalPrice(){
+  double totalPrice =  0.0;
+
+  for (var additive in additivesList) {
+    if (additive.isChecked.value) {
+    totalPrice += double.tryParse(additive.price) ?? 0.0;
+    }
+  }
+  return totalPrice;
+}
+}
+
 
