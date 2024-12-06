@@ -6,7 +6,7 @@ import 'package:multi_vendor_app/models/hook_models/hook_result.dart';
 import 'package:http/http.dart' as http;
 import 'package:multi_vendor_app/models/restaurant_model.dart';
 
-FetchHook useFetchRestaurants(String code) {
+FetchHook useFetchRestaurantsFoods(String code) {
   final restaurants = useState<List<RestaurantsModel>?>(null);
   final isLoading = useState<bool>(false);
   final error = useState<Exception?>(null);

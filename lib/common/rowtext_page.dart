@@ -3,11 +3,11 @@ import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/home/widgets/app_style.dart';
 import 'package:multi_vendor_app/home/widgets/reusable_text.dart';
 
-class RowtextPage extends StatelessWidget {
+class Rowtext extends StatelessWidget {
 
   final String first;
   final String second;
-  const RowtextPage({super.key, 
+  const Rowtext({super.key, 
   required this.first, 
   required this.second
   });
