@@ -1,8 +1,7 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:multi_vendor_app/common/custom_button.dart';
 import 'package:multi_vendor_app/common/custom_container.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/profile/profile_app_bar.dart';
@@ -17,7 +16,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: kPrimary,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40.h), // Dynamically set app bar height
+        preferredSize: Size.fromHeight(40.h),
         child: ProfileAppBar(),
       ),
       body: SafeArea(
@@ -26,100 +25,79 @@ class ProfilePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //SizedBox(height: 16.h), // Add spacing dynamically
-                UserInfoWidget(), // User Info section
+                UserInfoWidget(),
                 SizedBox(height: 10.h),
-                Container(
-                  height: 175.h,
-                  decoration: BoxDecoration(
-                    color: kLightWhite,
-                    
+                _buildProfileOptionsSection([
+                  ProfileTileWidget(
+                    ontap: () {
+                      // Handle navigation to My Orders
+                    },
+                    title: "My Orders",
+                    icon: Ionicons.fast_food_outline,
                   ),
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    physics: NeverScrollableScrollPhysics(),
-                    children: [
-                      ProfileTileWidget(
-                        ontap: () {
-                          
-                        },
-                        title: "My Orders", 
-                      icon: Ionicons.fast_food_outline
-                      ),
-
-                         ProfileTileWidget(
-                        ontap: () {
-                          
-                        },
-                        title: "My Favorite Places", 
-                      icon: Ionicons.heart_outline
-                      ),
-
-                         ProfileTileWidget(
-                        ontap: () {
-                          
-                        },
-                        title: "Review", 
-                      icon: Ionicons.chatbubble_outline
-                      ),
-
-                         ProfileTileWidget(
-                        ontap: () {
-                          
-                        },
-                        title: "Coupons", 
-                      icon: MaterialCommunityIcons.tag_outline
-                      ),
-
-
-                      SizedBox(height: 15.h),
-                Container(
-                  height: 175.h,
-                  decoration: BoxDecoration(
-                    color: kLightWhite,
-                    
+                  ProfileTileWidget(
+                    ontap: () {
+                      // Handle navigation to My Favorite Places
+                    },
+                    title: "My Favorite Places",
+                    icon: Ionicons.heart_outline,
                   ),
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    physics: NeverScrollableScrollPhysics(),
-                    children: [
-                      ProfileTileWidget(
-                        ontap: () {
-                          
-                        },
-                        title: "Shipping Address", 
-                      icon: SimpleLineIcons.location_pin,
-                      ),
-
-                         ProfileTileWidget(
-                        ontap: () {
-                          
-                        },
-                        title: "Service Center", 
-                      icon: AntDesign.customerservice,
-                      ),
-
-                         ProfileTileWidget(
-                        ontap: () {
-                          
-                        },
-                        title: "Coupons", 
-                      icon: MaterialIcons.rss_feed,
-                      ),
-
-                         ProfileTileWidget(
-                        ontap: () {
-                          
-                        },
-                        title: "Settings", 
-                      icon: AntDesign.setting,
-                      ),
-                      
-                    ],
+                  ProfileTileWidget(
+                    ontap: () {
+                      // Handle navigation to Review
+                    },
+                    title: "Review",
+                    icon: Ionicons.chatbubble_outline,
                   ),
+                  ProfileTileWidget(
+                    ontap: () {
+                      // Handle navigation to Coupons
+                    },
+                    title: "Coupons",
+                    icon: MaterialCommunityIcons.tag_outline,
+                  ),
+                ]),
+                SizedBox(height: 15.h),
+                _buildProfileOptionsSection([
+                  ProfileTileWidget(
+                    ontap: () {
+                      // Handle navigation to Shipping Address
+                    },
+                    title: "Shipping Address",
+                    icon: SimpleLineIcons.location_pin,
+                  ),
+                  ProfileTileWidget(
+                    ontap: () {
+                      // Handle navigation to Service Center
+                    },
+                    title: "Service Center",
+                    icon: AntDesign.customerservice,
+                  ),
+                  ProfileTileWidget(
+                    ontap: () {
+                      // Handle navigation to RSS Feed
+                    },
+                    title: "RSS Feed",
+                    icon: MaterialIcons.rss_feed,
+                  ),
+                  ProfileTileWidget(
+                    ontap: () {
+                      // Handle navigation to Settings
+                    },
+                    title: "Settings",
+                    icon: AntDesign.setting,
+                  ),
+                ]),
+                SizedBox(height: 20.h),
+                CustomButton(
+                  btnWidth: MediaQuery.of(context).size.width - 20.w,
+                  text: "Log Out",
+                  radius: 8.r,
+                  btnColor: kRed,
+                  onTap: () {
+                    // Handle logout functionality
+                  },
                 ),
-                
-                // Add more widgets as needed
               ],
             ),
           ),
@@ -127,5 +105,15 @@ class ProfilePage extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildProfileOptionsSection(List<Widget> tiles) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+      decoration: BoxDecoration(
+        color: kLightWhite,
+        borderRadius: BorderRadius.circular(8.r),
+      ),
+      child: Column(children: tiles),
+    );
+  }
 }
- 
