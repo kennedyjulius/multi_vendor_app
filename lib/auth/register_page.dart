@@ -4,22 +4,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:multi_vendor_app/auth/email_textfield.dart';
+import 'package:multi_vendor_app/auth/login_page.dart';
 import 'package:multi_vendor_app/common/custom_button.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/home/widgets/app_style.dart';
 import 'package:multi_vendor_app/home/widgets/back_ground_container.dart';
 import 'package:multi_vendor_app/home/widgets/reusable_text.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<RegisterPage> {
    final TextEditingController _emailController = TextEditingController();
    final TextEditingController _passwordController = TextEditingController();
+   final TextEditingController _confirmpasswordController = TextEditingController();
 
    final FocusNode _passwordFocusNode = FocusNode();
 
@@ -28,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
      _emailController.dispose();
      _passwordController.dispose();
      _passwordFocusNode.dispose();
+     _confirmpasswordController.dispose();
      super.dispose();
    }
 
@@ -76,6 +79,17 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _passwordController,
                   ),
 
+                  SizedBox(height: 25.h,),
+
+                EmailTextfield(
+
+                  hintText: "Confirm Password",
+                  prefixIcon: Icon(CupertinoIcons.padlock, 
+                  size: 22 ,
+                  color: kGrayLight,),
+                  controller: _confirmpasswordController,
+                  ),
+
                   SizedBox(height: 30,),
 
                     Padding(
@@ -85,10 +99,14 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           GestureDetector(
                             onTap: () {
+                             Get.to(LoginPage(),
+                             transition: Transition.fadeIn,
+                             duration: Duration(milliseconds: 1200)
+                             );
                               
                             },
                             child: ReusableText(
-                            text: "Register", 
+                            text: "Login", 
                                               style: appStyle(12, 
                                               Colors.blue, 
                                               FontWeight.normal),
@@ -100,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   CustomButton(
                     btnWidth: width, 
-                    text: "L O G I N", 
+                    text: "R E G I S T E R", 
                     onTap: () {
                     Get.to(LoginPage(), 
                     transition: Transition.cupertino, 
