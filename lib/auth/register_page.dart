@@ -18,7 +18,7 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<RegisterPage> {
+class _RegisterPageState extends State<RegisterPage> {
    final TextEditingController _emailController = TextEditingController();
    final TextEditingController _passwordController = TextEditingController();
    final TextEditingController _confirmpasswordController = TextEditingController();
@@ -128,9 +128,9 @@ class _LoginPageState extends State<RegisterPage> {
                   btnHeight: 35.h,
                   ),
 
-                  SizedBox(height: 30.h,),
+                  SizedBox(height: 35.h,),
                   ReusableText(
-                    text: "Register", 
+                    text: "login", 
                   style: appStyle(12, 
                   Colors.blue, 
                   FontWeight.normal),

@@ -22,7 +22,7 @@ class EmailTextfield extends StatelessWidget {
   // final void Function()? onEditingComplete;
   final TextInputType? keyboardType;
   // final String? initialValue;
-  //final TextEditingController controller;
+  //final TextEditingController ;
   //final String? hintText;
   //final Widget? prefixIcon;
 
@@ -37,7 +37,7 @@ class EmailTextfield extends StatelessWidget {
       //onEditingComplete: onEditingComplete,
       keyboardType: keyboardType ?? TextInputType.emailAddress,
       //initialValue: initialValue,
-      controller: passwordController,
+      //controller: passwordcontroller,
       obscureText: true,
       validator: (value) {
         if (value!.isEmpty) {

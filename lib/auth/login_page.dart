@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                     text: "L O G I N", 
                     onTap: () {
                     Get.to(LoginPage(), 
-                    transition: Transition.cupertino, 
+                    transition: Transition.fadeIn, 
                     duration: Duration(milliseconds: 900)
                     );
                   },
