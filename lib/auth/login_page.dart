@@ -9,6 +9,7 @@ import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/home/widgets/app_style.dart';
 import 'package:multi_vendor_app/home/widgets/back_ground_container.dart';
 import 'package:multi_vendor_app/home/widgets/reusable_text.dart';
+import 'package:multi_vendor_app/models/login_model.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -106,6 +107,15 @@ class _LoginPageState extends State<LoginPage> {
                     transition: Transition.fadeIn, 
                     duration: Duration(milliseconds: 900)
                     );
+                    if (_emailController.text.isNotEmpty && _passwordController.text.length >= 8) {
+                      LoginModel model = LoginModel(
+                        email: _emailController.text, 
+                        password: _passwordController.text
+                        );
+
+                        String data = loginModelToJson(model);
+                    
+                    }
                   },
                   btnHeight: 35.h,
                   ),

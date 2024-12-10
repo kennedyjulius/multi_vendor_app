@@ -22,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
    final TextEditingController _emailController = TextEditingController();
    final TextEditingController _passwordController = TextEditingController();
    final TextEditingController _confirmpasswordController = TextEditingController();
+   final TextEditingController _userinitController = TextEditingController();
 
    final FocusNode _passwordFocusNode = FocusNode();
 
@@ -124,6 +125,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     transition: Transition.cupertino, 
                     duration: Duration(milliseconds: 900)
                     );
+
+                    if (_emailController.text.isNotEmpty && _userController.text.isNotEmpty && _passwordController.text.length >= 8) {
+                      RegistrationModel model = RegistrationModel(
+                        username: _userController.text,
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
+
+                      String data = registrationModelToJson(model);
+                    
+                    }
                   },
                   btnHeight: 35.h,
                   ),
