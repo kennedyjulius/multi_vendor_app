@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:multi_vendor_app/auth/login_page.dart';
 import 'package:multi_vendor_app/auth/verification_page.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:multi_vendor_app/models/login_response.dart';
 import 'package:multi_vendor_app/views/entrypoint.dart';
 
 class LoginController extends GetxController {
@@ -89,5 +91,44 @@ class LoginController extends GetxController {
         colorText: Colors.red,
       );
     }
+  }
+
+  // Function to handle logout
+  void logoutFunction() {
+    try {
+      // Clear persistent storage
+      box.erase();
+
+      // Show logout message
+      Get.snackbar(
+        "Logged Out",
+        "You have been logged out successfully.",
+        colorText: kLightWhite,
+        backgroundColor: kPrimary,
+        icon: Icon(Icons.exit_to_app),
+      );
+
+      // Redirect to the login page
+      Get.offAll(
+        LoginPage(),
+        transition: Transition.fade,
+        duration: Duration(milliseconds: 900),
+      );
+    } catch (e) {
+      // Handle any unexpected errors
+      Get.snackbar(
+        "Error",
+        "Failed to log out. Please try again.",
+        colorText: kLightWhite,
+        backgroundColor: kRed,
+        icon: Icon(Icons.error_outline),
+      );
+    }
+  }
+
+  LoginResponse? getUserInfo(){
+    String? userId = box.read("userId");
+
+    String? data = box.read(userId.toString());
   }
 }

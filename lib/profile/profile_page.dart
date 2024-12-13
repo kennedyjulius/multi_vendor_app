@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:multi_vendor_app/common/custom_button.dart';
 import 'package:multi_vendor_app/common/custom_container.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
+import 'package:multi_vendor_app/controllers/login_controller.dart';
 import 'package:multi_vendor_app/profile/profile_app_bar.dart';
 import 'package:multi_vendor_app/profile/profile_tile_widget.dart';
 import 'package:multi_vendor_app/profile/user_info_widget.dart';
@@ -13,6 +16,21 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
+
+    final box = GetStorage();
+
+    String? token = box.read('token');
+
+    if (token != null) {
+    controller.getUserInfo();
+
+    //print(user!.email);
+    }
+
+    if (token == null) {
+    return LoginRedirect();
+    }
     return Scaffold(
       backgroundColor: kPrimary,
       appBar: PreferredSize(
@@ -25,7 +43,7 @@ class ProfilePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                UserInfoWidget(),
+                UserInfoWidget(user: user,),
                 SizedBox(height: 10.h),
                 _buildProfileOptionsSection([
                   ProfileTileWidget(
@@ -96,6 +114,7 @@ class ProfilePage extends StatelessWidget {
                   btnColor: kRed,
                   onTap: () {
                     // Handle logout functionality
+                    controller.logoutFunction();
                   },
                 ),
               ],

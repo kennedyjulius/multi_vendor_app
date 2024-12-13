@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:multi_vendor_app/auth/email_textfield.dart';
 import 'package:multi_vendor_app/common/custom_button.dart';
 import 'package:multi_vendor_app/constants/constants.dart';
+import 'package:multi_vendor_app/controllers/login_controller.dart';
 import 'package:multi_vendor_app/home/widgets/app_style.dart';
 import 'package:multi_vendor_app/home/widgets/back_ground_container.dart';
 import 'package:multi_vendor_app/home/widgets/reusable_text.dart';
@@ -34,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
     return Scaffold(
       backgroundColor: kPrimary,
       appBar: AppBar(
@@ -114,6 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                         );
 
                         String data = loginModelToJson(model);
+                        controller.loginFunction(data as Map<String, dynamic>);
                     
                     }
                   },
