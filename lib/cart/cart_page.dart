@@ -35,33 +35,6 @@ class CartPage extends StatelessWidget {
     if (user != null && user.verification == false) {
       return VerificationPage();
     }
-    return Scaffold(
-      backgroundColor: kPrimary,
-      appBar: AppBar(
-        title: ReusableText(
-            text: "Please verify your account",
-            style: appStyle(12, kGray, FontWeight.w600)),
-        centerTitle: true,
-        backgroundColor: kOffWhite,
-        elevation: 0,
-      ),
-      body: SafeArea(
-        child: CustomContainer(
-          color: Colors.white ,
-        containerContent: SizedBox(
-        height: height,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            Lottie.asset("assets/anime/delivery.json"),
-            SizedBox(height: 30,),
-            ReusableText(text: "Please Verify your Account", 
-            style: appStyle(12, kGray, FontWeight.w600))
-          ],
-        ),
-      )
-      )
-      ),
-    );
+    return 
   }
 }
