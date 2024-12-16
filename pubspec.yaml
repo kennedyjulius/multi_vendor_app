@@ -44,7 +44,7 @@ dependencies:
   flutter_svg: ^2.0.9
   flutter_vector_icons: ^2.0.0
   geocoding: ^2.0.0
-  geolocator: ^7.0.3
+  geolocator: ^13.0.2
   get: ^4.6.6
   get_storage: ^2.1.1
   glass: ^1.0.2+1

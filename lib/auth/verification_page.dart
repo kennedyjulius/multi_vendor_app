@@ -67,7 +67,7 @@ class VerificationPage extends StatelessWidget {
               btnHeight: 35.h,
               text: "V E R I F Y  A C C O U N T",
               onTap: () {
-                controller.verificationFunction(code);
+                controller.verificationFunction();
               },
               ),
 

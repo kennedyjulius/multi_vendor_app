@@ -8,7 +8,7 @@ import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:multi_vendor_app/models/api_error.dart';
 
-class RegistrationController  extends GetxController {
+class RegistrationController extends GetxController {
   final box = GetStorage(); // For persistent storage
   RxBool _isLoading = false.obs; // Observable loading state
 
@@ -20,11 +20,11 @@ class RegistrationController  extends GetxController {
     _isLoading.value = newState;
   }
 
-  // Function to handle login
+  // Function to handle registration
   Future<void> registrationFunction(String data) async {
     isLoading = true; // Start loading
     try {
-      var url = Uri.parse('$appBaseUrl/login');
+      var url = Uri.parse('$appBaseUrl/register'); // Corrected endpoint
       Map<String, String> headers = {'Content-Type': 'application/json'};
 
       // Send HTTP POST request
@@ -47,25 +47,34 @@ class RegistrationController  extends GetxController {
 
         // Show success message
         Get.snackbar(
+          "Success",
           "You are successfully registered!",
-          data.message,
           colorText: kLightWhite,
           backgroundColor: kPrimary,
           icon: Icon(Ionicons.fast_food_outline),
         );
-      }else{
+      } else {
+        // Parse and handle API errors
         var error = apiErrorFromJson(response.body);
-
-        Get.snackbar("Failed to register", error.message,
-        colorText: kLightWhite,
-        backgroundColor: kRed,
-        icon: Icon(Icons.error_outline)
+        Get.snackbar(
+          "Failed to register",
+          error.message,
+          colorText: kLightWhite,
+          backgroundColor: kRed,
+          icon: Icon(Icons.error_outline),
         );
       }
-        // Navigate based on verification status
-        
-    }catch (e) {
-      debugprint(e.toString());
+    } catch (e) {
+      // Handle unexpected errors
+      isLoading = false;
+      Get.snackbar(
+        "Error",
+        "Something went wrong. Please try again later.",
+        colorText: Colors.red,
+      );
+      debugPrint(e.toString());
+    } finally {
+      isLoading = false; // Stop loading in all cases
     }
   }
 }

@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-String googleApiKey = '';
+String googleApiKey = 'AIzaSyDGZ0PvWo4AoXaZkRdlUFHao-NccX62EhI';
 
 const kPrimary = Color(0xFF30b9b2);
 const kPrimaryLight = Color(0xFF40F3EA);
@@ -31,3 +31,4 @@ final List<String> verificationResons = [
   'Exclusive Offers: Stay in the loop for special deals and promotions'
 ];
 
+//AIzaSyDGZ0PvWo4AoXaZkRdlUFHao-NccX62EhI
