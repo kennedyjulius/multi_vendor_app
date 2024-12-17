@@ -9,13 +9,12 @@ class UserLocationController extends GetxController {
   LatLng position = LatLng(0, 0);
 
   // Reactive variable to store the address
-  RxString address = ''.obs;
+  RxString _address = ''.obs;
+  String get address => _address.value; // Getter for address
 
   // Reactive variable to store the postal code
   RxString _postalCode = ''.obs;
-
-  // Getter for postal code
-  String get postalCode => _postalCode.value;
+  String get postalCode => _postalCode.value; // Getter for postal code
 
   // Setter for postal code
   set postalCode(String value) {
@@ -29,8 +28,8 @@ class UserLocationController extends GetxController {
   }
 
   // Method to update the address
-  void setAddress(String newAddress) {
-    address.value = newAddress;
+  void setAddress(String value) {
+    _address.value = value;
   }
 
   // Fetch user address and postal code based on LatLng

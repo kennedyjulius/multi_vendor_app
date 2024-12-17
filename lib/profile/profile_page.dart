@@ -9,6 +9,7 @@ import 'package:multi_vendor_app/constants/constants.dart';
 import 'package:multi_vendor_app/controllers/login_controller.dart';
 import 'package:multi_vendor_app/profile/profile_app_bar.dart';
 import 'package:multi_vendor_app/profile/profile_tile_widget.dart';
+import 'package:multi_vendor_app/profile/shipping_address.dart';
 import 'package:multi_vendor_app/profile/user_info_widget.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -80,6 +81,10 @@ class ProfilePage extends StatelessWidget {
                   ProfileTileWidget(
                     ontap: () {
                       // Handle navigation to Shipping Address
+                      Get.to(ShippingAddress(),
+                      transition: Transition.rightToLeft,
+                      duration: Duration(milliseconds: 100)
+                      );
                     },
                     title: "Shipping Address",
                     icon: SimpleLineIcons.location_pin,
